@@ -1,7 +1,13 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\FormController;
+use App\Http\Controllers\KecakapanController;
+use App\Http\Controllers\KerapianController;
+use App\Http\Controllers\LariController;
+use App\Http\Controllers\PenguasaanController;
 use App\Http\Controllers\PortalController;
+use App\Http\Controllers\TanggungController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -25,4 +31,12 @@ Route::controller(AuthController::class)->group(function () {
     Route::get('/login', 'index')->name('login')->middleware('guest');
     Route::post('/login', 'login');
     Route::post('/logout', 'logout');
+});
+
+Route::prefix('/form')->middleware('auth')->group(function () {
+    Route::resource('/utama', FormController::class);
+    Route::resource('/tanggung', TanggungController::class);
+    Route::resource('/penguasaan', PenguasaanController::class);
+    Route::resource('/kecakapan', KecakapanController::class);
+    Route::resource('/kerapian', KerapianController::class);
 });

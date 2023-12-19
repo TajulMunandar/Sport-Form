@@ -10,7 +10,7 @@
     <meta name="theme-color" content="#ffffff">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
-        <!-- Font Awesome Icons -->
+    <!-- Font Awesome Icons -->
     <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.2.0/css/all.css">
     <style>
         .image {
@@ -104,8 +104,11 @@
                                 <p class="card-text">
                                     Form Wasit Lari
                                 </p>
-                                <div class="mt-auto">
-                                    <a href="" class="btn btn-primary stretched-link d-block">Masuk</a>
+                                <div class="mt-auto ">
+                                    <button data-bs-toggle="modal" data-bs-target="#exampleModal"
+                                        class="btn btn-primary stretched-link w-100">
+                                        Masuk
+                                    </button>
                                 </div>
                             </div>
                         </div>
@@ -117,9 +120,10 @@
                                 <p class="card-text">
                                     Form Wasit Lempar
                                 </p>
-                                <div class="mt-auto">
-                                    <a href="" class="btn btn-primary stretched-link d-block">Masuk</a>
-                                </div>
+                                <button data-bs-toggle="modal" data-bs-target="#exampleModal2"
+                                    class="btn btn-primary stretched-link w-100">
+                                    Masuk
+                                </button>
                             </div>
                         </div>
                     </div>
@@ -130,22 +134,10 @@
                                 <p class="card-text">
                                     Form Wasit Lompat
                                 </p>
-                                <div class="mt-auto">
-                                    <a href="" class="btn btn-primary stretched-link d-block">Masuk</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col col-lg-3 mb-3">
-                        <div class="card h-100">
-                            <div class="card-body d-flex flex-column">
-                                <h5 class="card-title">Tolak</h5>
-                                <p class="card-text">
-                                    Form Wasit Tolak
-                                </p>
-                                <div class="mt-auto">
-                                    <a href="" class="btn btn-primary stretched-link d-block">Masuk</a>
-                                </div>
+                                <button data-bs-toggle="modal" data-bs-target="#exampleModal3"
+                                    class="btn btn-primary stretched-link w-100">
+                                    Masuk
+                                </button>
                             </div>
                         </div>
                     </div>
@@ -156,12 +148,61 @@
                                 <p class="card-text">
                                     Form Wasit Jalan
                                 </p>
-                                <div class="mt-auto">
-                                    <a href="" class="btn btn-primary stretched-link d-block">Masuk</a>
-                                </div>
+                                <button data-bs-toggle="modal" data-bs-target="#exampleModal4"
+                                    class="btn btn-primary stretched-link w-100">
+                                    Masuk
+                                </button>
                             </div>
                         </div>
                     </div>
+
+                    <form action="{{ route('utama.store') }}" method="post">
+                        @csrf
+                        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+                            aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h1 class="modal-title fs-5" id="exampleModalLabel">Modal Lari</h1>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                            aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <div class="mb-3">
+                                            <label for="nama_wasit" class="form-label">Nama Wasit</label>
+                                            <input type="name" class="form-control" id="nama_wasit"
+                                                name="nama_wasit" aria-describedby="emailHelp">
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="pb" class="form-label">PB</label>
+                                            <input type="name" class="form-control" id="pb" name="pb"
+                                                aria-describedby="emailHelp">
+                                        </div>
+                                        <label for="pb" class="form-label">Alamat</label>
+                                        <div class="form-floating">
+                                            <textarea class="form-control" placeholder="Alamat" id="floatingTextarea"></textarea>
+                                            <label for="floatingTextarea">Alamat</label>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="pb" class="form-label">Jenis</label>
+                                            <select class="form-select" name="jenis" disabled>
+                                                <option value="1" selected>Lari</option>
+                                                <option value="2">Jalan</option>
+                                                <option value="3">Lompat</option>
+                                                <option value="4">Lempar</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary"
+                                            data-bs-dismiss="modal">Tutup</button>
+                                        <button type="submit" class="btn btn-primary">Simpan</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+
                 </div>
             </div>
         </div>
