@@ -94,6 +94,26 @@
             </div>
         </div>
 
+        {{--  ALERT  --}}
+        <div class="row mt-3">
+            <div class="col">
+                @if (session()->has('success'))
+                    <div class="alert alert-success alert-dismissible fade show" role="alert">
+                        {{ session('success') }}
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                @endif
+
+                @if (session()->has('failed'))
+                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                        {{ session('failed') }}
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                @endif
+            </div>
+        </div>
+        {{--  ALERT  --}}
+
         <div class="body flex-grow-1 px-3">
             <div class="container-lg">
                 <div class="row">
@@ -180,18 +200,124 @@
                                         </div>
                                         <label for="pb" class="form-label">Alamat</label>
                                         <div class="form-floating">
-                                            <textarea class="form-control" placeholder="Alamat" id="floatingTextarea"></textarea>
+                                            <textarea class="form-control" placeholder="Alamat" id="floatingTextarea" name="alamat"></textarea>
                                             <label for="floatingTextarea">Alamat</label>
                                         </div>
+                                        <input type="hidden" value="1" name="jenis">
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary"
+                                            data-bs-dismiss="modal">Tutup</button>
+                                        <button type="submit" class="btn btn-primary">Simpan</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                    <form action="{{ route('utama.store') }}" method="post">
+                        @csrf
+                        <div class="modal fade" id="exampleModal2" tabindex="-1" aria-labelledby="exampleModalLabel"
+                            aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h1 class="modal-title fs-5" id="exampleModalLabel">Modal Lempar</h1>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                            aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
                                         <div class="mb-3">
-                                            <label for="pb" class="form-label">Jenis</label>
-                                            <select class="form-select" name="jenis" disabled>
-                                                <option value="1" selected>Lari</option>
-                                                <option value="2">Jalan</option>
-                                                <option value="3">Lompat</option>
-                                                <option value="4">Lempar</option>
-                                            </select>
+                                            <label for="nama_wasit" class="form-label">Nama Wasit</label>
+                                            <input type="name" class="form-control" id="nama_wasit"
+                                                name="nama_wasit" aria-describedby="emailHelp">
                                         </div>
+                                        <div class="mb-3">
+                                            <label for="pb" class="form-label">PB</label>
+                                            <input type="name" class="form-control" id="pb" name="pb"
+                                                aria-describedby="emailHelp">
+                                        </div>
+                                        <label for="pb" class="form-label">Alamat</label>
+                                        <div class="form-floating">
+                                            <textarea class="form-control" placeholder="Alamat" id="floatingTextarea" name="alamat"></textarea>
+                                            <label for="floatingTextarea">Alamat</label>
+                                        </div>
+                                        <input type="hidden" value="2" name="jenis">
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary"
+                                            data-bs-dismiss="modal">Tutup</button>
+                                        <button type="submit" class="btn btn-primary">Simpan</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                    <form action="{{ route('utama.store') }}" method="post">
+                        @csrf
+                        <div class="modal fade" id="exampleModal3" tabindex="-1" aria-labelledby="exampleModalLabel"
+                            aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h1 class="modal-title fs-5" id="exampleModalLabel">Modal Lompat</h1>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                            aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <div class="mb-3">
+                                            <label for="nama_wasit" class="form-label">Nama Wasit</label>
+                                            <input type="name" class="form-control" id="nama_wasit"
+                                                name="nama_wasit" aria-describedby="emailHelp">
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="pb" class="form-label">PB</label>
+                                            <input type="name" class="form-control" id="pb" name="pb"
+                                                aria-describedby="emailHelp">
+                                        </div>
+                                        <label for="pb" class="form-label">Alamat</label>
+                                        <div class="form-floating">
+                                            <textarea class="form-control" placeholder="Alamat" id="floatingTextarea" name="alamat"></textarea>
+                                            <label for="floatingTextarea">Alamat</label>
+                                        </div>
+                                        <input type="hidden" value="3" name="jenis">
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary"
+                                            data-bs-dismiss="modal">Tutup</button>
+                                        <button type="submit" class="btn btn-primary">Simpan</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                    <form action="{{ route('utama.store') }}" method="post">
+                        @csrf
+                        <div class="modal fade" id="exampleModal4" tabindex="-1" aria-labelledby="exampleModalLabel"
+                            aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h1 class="modal-title fs-5" id="exampleModalLabel">Modal Jalan</h1>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                            aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <div class="mb-3">
+                                            <label for="nama_wasit" class="form-label">Nama Wasit</label>
+                                            <input type="name" class="form-control" id="nama_wasit"
+                                                name="nama_wasit" aria-describedby="emailHelp">
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="pb" class="form-label">PB</label>
+                                            <input type="name" class="form-control" id="pb" name="pb"
+                                                aria-describedby="emailHelp">
+                                        </div>
+                                        <label for="pb" class="form-label">Alamat</label>
+                                        <div class="form-floating">
+                                            <textarea class="form-control" placeholder="Alamat" id="floatingTextarea" name="alamat"></textarea>
+                                            <label for="floatingTextarea">Alamat</label>
+                                        </div>
+                                        <input type="hidden" value="4" name="jenis">
                                     </div>
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-secondary"

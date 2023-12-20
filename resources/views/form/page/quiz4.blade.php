@@ -1,7 +1,7 @@
 @extends('form.component.main')
 
 @section('content')
-    <div class="container">
+    <div class="container ">
         <div class="row mt-3">
             <div class="col">
                 @if (session()->has('success'))
@@ -21,8 +21,8 @@
         </div>
         <div class="row">
             <div class="col">
-                <p class="fs-3 fw-bold mb-2">
-                    Aspek Tanggung Jawab Profesi
+                <p class="fs-3 fw-bold mb-0">
+                    Aspek Kerapian
                 </p>
                 <p>
                     Keterangan:
@@ -72,7 +72,7 @@
             </div>
         </div>
         <hr>
-        <form action="{{ route('tanggung.store') }}" method="post" enctype="multipart/form-data">
+        <form action="{{ route('kerapian.store') }}" method="post" enctype="multipart/form-data">
             @csrf
             <input type="hidden" name="id_form" value="{{ request('id') }}">
             <div class="row">

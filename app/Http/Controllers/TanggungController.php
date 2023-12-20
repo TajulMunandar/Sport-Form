@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Form;
+use App\Models\Jawaban;
+use App\Models\Soal;
 use Illuminate\Http\Request;
 
 class TanggungController extends Controller
@@ -11,7 +14,8 @@ class TanggungController extends Controller
      */
     public function index()
     {
-        return view('form.page.quiz');
+        $soals = Soal::where('id_aspek', 1)->get();
+        return view('form.page.quiz')->with(compact('soals'));
     }
 
     /**
@@ -27,7 +31,18 @@ class TanggungController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $soal = $request->input('id_soal');
+        $skor = $request->input('skor');
+        foreach ($soal as $soa => $index) {
+            $validatedData1 = [
+                'id_form' => $request->id_form,
+                'id_soal' => $soal[$soa],
+                'skor' => $skor[$index],
+            ];
+
+           Jawaban::create($validatedData1);
+        }
+        return redirect()->route('penguasaan.index', ['id' => $request->id_form])->with('success', 'Tanggung Jawab Profesi berhasil ditambahkan!');
     }
 
     /**

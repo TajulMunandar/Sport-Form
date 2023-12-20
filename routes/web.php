@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\FinalController;
 use App\Http\Controllers\FormController;
 use App\Http\Controllers\KecakapanController;
 use App\Http\Controllers\KerapianController;
@@ -39,4 +40,5 @@ Route::prefix('/form')->middleware('auth')->group(function () {
     Route::resource('/penguasaan', PenguasaanController::class);
     Route::resource('/kecakapan', KecakapanController::class);
     Route::resource('/kerapian', KerapianController::class);
+    Route::resource('/final', FinalController::class);
 });

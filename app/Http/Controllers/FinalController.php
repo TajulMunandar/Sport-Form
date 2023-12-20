@@ -5,14 +5,14 @@ namespace App\Http\Controllers;
 use App\Models\Form;
 use Illuminate\Http\Request;
 
-class FormController extends Controller
+class FinalController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        //
+        return view('form.page.final');
     }
 
     /**
@@ -28,20 +28,7 @@ class FormController extends Controller
      */
     public function store(Request $request)
     {
-        try {
-            $validatedData = $request->validate([
-                'nama_wasit' => 'required|max:255',
-                'pb' => 'required|max:255',
-                'alamat' => 'required|max:255',
-                'jenis' => 'required|max:255',
-            ]);
-        } catch (\Illuminate\Validation\ValidationException $exception) {
-            return redirect()->route('portal.index')->with('failed', $exception->getMessage());
-        }
-
-       $form = Form::create($validatedData);
-
-        return redirect()->route('tanggung.index', ['id' => $form->id])->with('success', 'Form baru berhasil ditambahkan!');
+        //
     }
 
     /**
@@ -63,9 +50,17 @@ class FormController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request)
     {
-        //
+        $rules = [
+            'simpulan_penilaian' => 'required'
+          ];
+
+          $validatedData = $request->validate($rules);
+
+          Form::where('id', $request->id_form)->update($validatedData);
+
+          return redirect('/portal')->with('success', 'Form baru berhasil tambahkan!');
     }
 
     /**

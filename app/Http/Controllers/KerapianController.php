@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Jawaban;
+use App\Models\Soal;
 use Illuminate\Http\Request;
 
 class KerapianController extends Controller
@@ -11,7 +13,8 @@ class KerapianController extends Controller
      */
     public function index()
     {
-        //
+        $soals = Soal::where('id_aspek', 4)->get();
+        return view('form.page.quiz4')->with(compact('soals'));
     }
 
     /**
@@ -27,7 +30,18 @@ class KerapianController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $soal = $request->input('id_soal');
+        $skor = $request->input('skor');
+        foreach ($soal as $soa => $index) {
+            $validatedData1 = [
+                'id_form' => $request->id_form,
+                'id_soal' => $soal[$soa],
+                'skor' => $skor[$index],
+            ];
+
+           Jawaban::create($validatedData1);
+        }
+        return redirect()->route('final.index', ['id' => $request->id_form])->with('success', 'Tanggung Jawab Profesi berhasil ditambahkan!');
     }
 
     /**
