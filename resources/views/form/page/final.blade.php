@@ -27,7 +27,7 @@
             </div>
         </div>
         <hr>
-        <form action="{{ route('final.update',request('id')) }}" method="post" enctype="multipart/form-data">
+        <form action="{{ route('final.update', request('id')) }}" method="post" enctype="multipart/form-data">
             @method('put')
             @csrf
             <input type="hidden" name="id_form" value="{{ request('id') }}">

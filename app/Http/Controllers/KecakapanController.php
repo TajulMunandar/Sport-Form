@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Form;
 use App\Models\Jawaban;
 use App\Models\Soal;
 use Illuminate\Http\Request;
@@ -13,8 +14,10 @@ class KecakapanController extends Controller
      */
     public function index()
     {
+        $id= request('id');
+        $form = Form::where('id', $id)->first();
         $soals = Soal::where('id_aspek', 3)->get();
-        return view('form.page.quiz3')->with(compact('soals'));
+        return view('form.page.quiz3')->with(compact('soals', 'form'));
     }
 
     /**

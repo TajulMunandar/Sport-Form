@@ -14,8 +14,10 @@ class TanggungController extends Controller
      */
     public function index()
     {
+        $id= request('id');
+        $form = Form::where('id', $id)->first();
         $soals = Soal::where('id_aspek', 1)->get();
-        return view('form.page.quiz')->with(compact('soals'));
+        return view('form.page.quiz')->with(compact('soals', 'form'));
     }
 
     /**

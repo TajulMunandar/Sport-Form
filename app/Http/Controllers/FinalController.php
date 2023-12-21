@@ -12,7 +12,9 @@ class FinalController extends Controller
      */
     public function index()
     {
-        return view('form.page.final');
+        $id= request('id');
+        $form = Form::where('id', $id)->first();
+        return view('form.page.final')->with(compact('form'));
     }
 
     /**
