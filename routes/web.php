@@ -1,12 +1,17 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\BukuController;
 use App\Http\Controllers\FinalController;
 use App\Http\Controllers\FormController;
+use App\Http\Controllers\JalanController;
 use App\Http\Controllers\KecakapanController;
 use App\Http\Controllers\KerapianController;
 use App\Http\Controllers\LariController;
+use App\Http\Controllers\LemparController;
+use App\Http\Controllers\LompatController;
 use App\Http\Controllers\PenguasaanController;
+use App\Http\Controllers\PeraturanController;
 use App\Http\Controllers\PortalController;
 use App\Http\Controllers\TanggungController;
 use Illuminate\Support\Facades\Route;
@@ -25,8 +30,11 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('index');
 });
+Route::get('/buku', function () {
+    return view('buku');
+});
 
-Route::get('/portal', [PortalController::class, 'index'])->name('portal.index')->middleware('auth');
+Route::get('/dashboard', [PortalController::class, 'index'])->name('portal.index')->middleware('auth');
 
 Route::controller(AuthController::class)->group(function () {
     Route::get('/login', 'index')->name('login')->middleware('guest');
@@ -41,4 +49,11 @@ Route::prefix('/form')->middleware('auth')->group(function () {
     Route::resource('/kecakapan', KecakapanController::class);
     Route::resource('/kerapian', KerapianController::class);
     Route::resource('/final', FinalController::class);
+    Route::resource('/lari', LariController::class);
+    Route::resource('/lompat', LompatController::class);
+    Route::resource('/jalan', JalanController::class);
+    Route::resource('/lempar', LemparController::class);
 });
+
+Route::resource('/buku', BukuController::class);
+Route::resource('/peraturan', PeraturanController::class);

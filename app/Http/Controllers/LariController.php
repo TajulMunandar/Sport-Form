@@ -11,7 +11,8 @@ class LariController extends Controller
      */
     public function index()
     {
-        return view('form.page.lari.quiz');
+        $title = "Form Lari";
+        return view('dashboard.lari.index')->with(compact("title"));
     }
 
     /**

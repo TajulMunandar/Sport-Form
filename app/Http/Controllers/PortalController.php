@@ -8,6 +8,7 @@ class PortalController extends Controller
 {
     function index()
     {
-        return view('portal');
+        $title = "Dasboard";
+        return view('dashboard.index')->with(compact("title"));
     }
 }

@@ -53,7 +53,7 @@
                     <div class="card-body p-6">
                         <div class="mb-4">
                             <a href="#" class="d-flex justify-content-center">
-                                <img src="{{ asset('images/logos/logo.png') }}" class="img-fluid mb-6"
+                                <img src="{{ asset('img/logo.jpg') }}" class="img-fluid mb-6"
                                     alt="Sport" style="width: 60%">
                             </a>
                             <p class="mb-5">Please enter your user information.</p>
