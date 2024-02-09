@@ -13,10 +13,14 @@
                     <label for="pb" class="form-label">PB/Pemprov</label>
                     <input type="name" class="form-control" id="pb" name="pb" aria-describedby="emailHelp">
                 </div>
-                <label for="pb" class="form-label">Alamat</label>
+                <div class="mb-3">
+                    <label for="email" class="form-label">Email</label>
+                    <input type="email" class="form-control" id="email" name="email" aria-describedby="emailHelp">
+                </div>
+                <label for="pb" class="form-label">Alamat </label>
                 <div class="form-floating">
                     <textarea class="form-control" placeholder="Alamat" id="floatingTextarea" name="alamat"></textarea>
-                    <label for="floatingTextarea">Alamat</label>
+                    <label for="floatingTextarea">Alamat </label>
                 </div>
                 <input type="hidden" value="4" name="jenis">
                 <button class="btn btn-primary float-end mt-4">Simpan</button>

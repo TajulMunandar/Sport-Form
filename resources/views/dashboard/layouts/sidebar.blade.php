@@ -20,7 +20,7 @@
         <li class="menu-item {{ Request::is('form/*') ? 'active open' : '' }}">
             <a href="javascript:void(0);" class="menu-link menu-toggle">
                 <i class="fa-duotone fa-scroll fa-sm me-3"></i>
-                <div data-i18n="Layouts">Form</div>
+                <div data-i18n="Layouts">Instrumen</div>
             </a>
 
             <ul class="menu-sub">

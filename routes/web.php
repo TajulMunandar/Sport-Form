@@ -53,7 +53,19 @@ Route::prefix('/form')->middleware('auth')->group(function () {
     Route::resource('/lompat', LompatController::class);
     Route::resource('/jalan', JalanController::class);
     Route::resource('/lempar', LemparController::class);
+
+});
+
+Route::prefix('/peraturan')->middleware('auth')->group(function () {
+    Route::get('/buku1', function () {
+        $title = "BUKU ATLETIK COVER HIJAU";
+        return view('dashboard.peraturan.buku1')->with(compact("title"));
+    });
+    Route::get('/buku2', function () {
+        $title = "Competition and Technical Rules – 2024 Edition";
+        return view('dashboard.peraturan.buku2')->with(compact("title"));
+    });
 });
 
 Route::resource('/buku', BukuController::class);
-Route::resource('/peraturan', PeraturanController::class);
+Route::get('/peraturan', [PeraturanController::class, 'index'])->name('peraturan.index')->middleware('auth');

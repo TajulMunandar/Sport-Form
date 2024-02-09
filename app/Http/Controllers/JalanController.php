@@ -8,7 +8,7 @@ class JalanController extends Controller
 {
     public function index()
     {
-        $title = "Form Jalan";
+        $title = "Instrumen Jalan";
         return view('dashboard.jalan.index')->with(compact("title"));
     }
 }

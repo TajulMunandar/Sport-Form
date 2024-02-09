@@ -28,7 +28,7 @@
   <!-- Template Main CSS File -->
   <link href="assets/css/style.css" rel="stylesheet">
 
- 
+
 </head>
 
 <body>
@@ -37,8 +37,8 @@
   <header id="header" class="fixed-top ">
     <div class="container d-flex align-items-center">
 
-      
-      
+
+
       <h1 class="logo me-auto"><img src="assets/img/zik.jpeg" class="figure-img img-fluid rounded" alt=""><a href="/"> ZIK ATLETIK</a></h1>
       <!-- Uncomment below if you prefer to use an image logo -->
       <!-- <a href="index.html" class="logo me-auto"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
@@ -47,16 +47,6 @@
         <ul>
           <li><a class="nav-link scrollto active" href="/">Home</a></li>
           <li><a class="nav-link scrollto" href="#about">Profil</a></li>
-          <li><a class="nav-link scrollto" href="/buku">Buku</a></li>
-                    <li class="dropdown"><a href="#"><span>Instrumen</span> <i class="bi bi-chevron-down"></i></a>
-            <ul>
-              <li><a href="#">Lari</a></li>
-              <li><a href="#">Lempar</a></li>
-              <li><a href="#">Lompat</a></li>
-              <li><a href="#">Tolak</a></li>
-              <li><a href="#">Jalan</a></li>
-            </ul>
-          </li>
         </ul>
         <i class="bi bi-list mobile-nav-toggle"></i>
       </nav><!-- .navbar -->
@@ -73,12 +63,12 @@
           <h1>Zikrur Rahmat</h1>
           <h2>Pengembangan Instrumen Penilaian Kinerja Wasit Atletik (Performance Assessment)</h2>
           <div class="d-flex justify-content-center justify-content-lg-start">
-            <a href="/login" class="btn-get-started scrollto">Get Started</a>
+            <a href="/login" class="btn-get-started scrollto">Sign In</a>
             <!--<a href="https://www.youtube.com/watch?v=jDDaplaOz7Q" class="glightbox btn-watch-video"><i class="bi bi-play-circle"></i><span>Watch Video</span></a>-->
           </div>
         </div>
         <div class="col-lg-6 order-1 order-lg-2 hero-img" data-aos="zoom-in" data-aos-delay="200">
-          <img src="assets/img/lari.png" class="img-fluid animated" alt="">
+          <img src="{{ asset('img/atletik.png') }}" class="img-fluid animated" alt="">
         </div>
       </div>
     </div>
@@ -153,7 +143,7 @@
 
       </div>-->
     </section><!-- End About Us Section -->
-    
+
     <section id="team" class="team section-bg">
       <div class="container" data-aos="fade-up">
 
@@ -238,14 +228,14 @@
     </section><!-- End Team Section -->
 
     <!-- ======= Why Us Section ======= -->
-   
+
 
   </main><!-- End #main -->
 
   <!-- ======= Footer ======= -->
   <footer id="footer">
 
-    
+
 
     <div class="container footer-bottom clearfix">
       <div class="copyright">

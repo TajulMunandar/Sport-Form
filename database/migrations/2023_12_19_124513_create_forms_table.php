@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('nama_wasit');
             $table->string('pb');
             $table->string('alamat');
+            $table->string('email');
             $table->tinyInteger('jenis');
             $table->string('simpulan_penilaian')->nullable();
             $table->timestamps();

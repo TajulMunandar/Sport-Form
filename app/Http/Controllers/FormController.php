@@ -33,6 +33,7 @@ class FormController extends Controller
                 'nama_wasit' => 'required|max:255',
                 'pb' => 'required|max:255',
                 'alamat' => 'required|max:255',
+                'email' => 'required|max:255',
                 'jenis' => 'required|max:255',
             ]);
         } catch (\Illuminate\Validation\ValidationException $exception) {

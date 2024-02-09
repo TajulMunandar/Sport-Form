@@ -8,7 +8,7 @@ class LompatController extends Controller
 {
     public function index()
     {
-        $title = "Form Lompat";
+        $title = "Instrumen Lompat";
         return view('dashboard.lompat.index')->with(compact("title"));
     }
 }

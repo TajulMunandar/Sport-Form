@@ -8,7 +8,7 @@ class LemparController extends Controller
 {
     public function index()
     {
-        $title = "Form Lempar";
+        $title = "Instrumen Lempar";
         return view('dashboard.lempar.index')->with(compact("title"));
     }
 }
