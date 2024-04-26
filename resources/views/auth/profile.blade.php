@@ -46,15 +46,17 @@
                     <div class="card border-0 bg-transparent"
                         style="box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;">
                         <div class="card-body p-4 ">
-
-                            <form action="{{ route('profile.update', auth()->user()->id) }}" method="POST">
+                            <form action="{{ route('profile.update', auth()->user()->id) }}" method="POST"
+                                enctype="multipart/form-data">
                                 @csrf
                                 @method('PUT')
                                 <input type="hidden" name="id" value="{{ auth()->user()->id }}">
+                                <input type="hidden" name="oldFile" value="{{ auth()->user()->sertif }}">
+                                <h3><b>Informasi Pribadi</b></h3>
                                 <div class="mb-3">
                                     <label for="name" class="form-label">Name</label>
                                     <input type="text" class="form-control @error('name') is-invalid @enderror"
-                                        name="name" id="name" value="{{ auth()->user()->staff->name }}" required>
+                                        name="name" id="name" value="{{ auth()->user()->name }}" required>
                                     @error('name')
                                         <div class="invalid-feedback">
                                             {{ $message }}
@@ -62,38 +64,33 @@
                                     @enderror
                                 </div>
                                 <div class="mb-3">
-                                    <label for="id_jabatan" class="form-label">Jabatan</label>
-                                    <select class="form-select" name="id_jabatan" id="id_jabatan" disabled>
-                                        @foreach ($jabatans as $jabatan)
-                                            @if (old('jabatan', auth()->user()->staff->jabatan->id) == $jabatan->id)
-                                                <option value="{{ auth()->user()->staff->jabatan->id }}" selected>
-                                                    {{ $jabatan->name }}
-                                                </option>
-                                            @endif
-                                        @endforeach
+                                    <label for="jenis_kelamin" class="form-label">Jenis Kelamin</label>
+                                    <select class="form-select" id="jenis_kelamin" name="jenis_kelamin">
+                                        <option value="LAKI-LAKI"
+                                            {{ Auth::user()->jenis_kelamin === 'LAKI-LAKI' ? 'selected' : '' }}>Laki -
+                                            Laki</option>
+                                        <option value="PEREMPUAN"
+                                            {{ Auth::user()->jenis_kelamin === 'PEREMPUAN' ? 'selected' : '' }}>
+                                            Perempuan</option>
                                     </select>
                                 </div>
                                 <div class="mb-3">
-                                    <label for="tempat_lahir" class="form-label">Tempat Lahir</label>
-                                    <input type="name"
-                                        class="form-control @error('tempat_lahir') is-invalid @enderror"
-                                        id="tempat_lahir" name="tempat_lahir"
-                                        value="{{ old('tempat_lahir', auth()->user()->staff->tempat_lahir) }}" autofocus
-                                        required>
-                                    @error('tempat_lahir')
+                                    <label for="ttl" class="form-label">Tempat Tanggal Lahir</label>
+                                    <input type="name" class="form-control @error('ttl') is-invalid @enderror"
+                                        id="ttl" name="ttl" value="{{ old('ttl', auth()->user()->ttl) }}"
+                                        autofocus required>
+                                    @error('ttl')
                                         <div class="invalid-feedback">
                                             {{ $message }}
                                         </div>
                                     @enderror
                                 </div>
                                 <div class="mb-3">
-                                    <label for="tanggal_lahir" class="form-label">Tanggal Lahir</label>
-                                    <input type="date"
-                                        class="form-control @error('tanggal_lahir') is-invalid @enderror"
-                                        id="tanggal_lahir" name="tanggal_lahir"
-                                        value="{{ old('tanggal_lahir', auth()->user()->staff->tanggal_lahir) }}"
-                                        autofocus required>
-                                    @error('tanggal_lahir')
+                                    <label for="sertif" class="form-label">Upload Sertifikat <i>(pdf)</i></label>
+                                    <input type="file" class="form-control @error('sertif') is-invalid @enderror"
+                                        name="sertif" id="sertif" placeholder="Enter your sertif"
+                                        value="{{ old('sertif') }}" autofocus>
+                                    @error('sertif')
                                         <div class="invalid-feedback">
                                             {{ $message }}
                                         </div>
@@ -102,7 +99,7 @@
                                 <div class="mb-3">
                                     <label for="email" class="form-label">Email</label>
                                     <input type="text" class="form-control @error('email') is-invalid @enderror"
-                                        name="email" id="email" value="{{ auth()->user()->staff->email }}" required>
+                                        name="email" id="email" value="{{ auth()->user()->email }}" required>
                                     @error('email')
                                         <div class="invalid-feedback">
                                             {{ $message }}
@@ -110,71 +107,69 @@
                                     @enderror
                                 </div>
                                 <div class="mb-3">
-                                    <label for="hp" class="form-label">No Hp</label>
-                                    <input type="text" class="form-control @error('hp') is-invalid @enderror"
-                                        name="hp" id="hp" value="{{ auth()->user()->staff->hp }}" required>
-                                    @error('hp')
+                                    <label for="no_hp" class="form-label">No Hp</label>
+                                    <input type="text" class="form-control @error('no_hp') is-invalid @enderror"
+                                        name="no_hp" id="no_hp" value="{{ auth()->user()->no_hp }}" required>
+                                    @error('no_hp')
                                         <div class="invalid-feedback">
                                             {{ $message }}
                                         </div>
                                     @enderror
                                 </div>
-                                <div class="mb-3">
-                                    <label for="sk" class="form-label">Surat Kerja Pertama</label>
-                                    <input type="text" class="form-control @error('sk') is-invalid @enderror"
-                                        name="sk" id="sk" value="{{ auth()->user()->staff->sk }}" required>
-                                    @error('sk')
-                                        <div class="invalid-feedback">
-                                            {{ $message }}
-                                        </div>
-                                    @enderror
-                                </div>
-                                <div class="mb-3">
-                                    <label for="aktif" class="form-label">aktif Aktif</label>
-                                    <input type="text" class="form-control @error('aktif') is-invalid @enderror"
-                                        name="aktif" id="aktif" value="{{ auth()->user()->staff->aktif }}" required>
-                                    @error('aktif')
-                                        <div class="invalid-feedback">
-                                            {{ $message }}
-                                        </div>
-                                    @enderror
-                                </div>
-                                <div class="mb-3">
-                                    <label for="unit_kerja" class="form-label">Unit Kerja Asal</label>
-                                    <input type="text"
-                                        class="form-control @error('unit_kerja') is-invalid @enderror"
-                                        name="unit_kerja" id="unit_kerja" value="{{ auth()->user()->staff->unit_kerja }}"
-                                        required>
-                                    @error('unit_kerja')
-                                        <div class="invalid-feedback">
-                                            {{ $message }}
-                                        </div>
-                                    @enderror
-                                </div>
-                                <div class="mb-3">
-                                    <label for="atasan" class="form-label">Atasan</label>
-                                    @if (isset($atasan) && $atasan->first())
+                                @if (auth()->user()->status == 'WASIT')
+                                    <h3> <b>Informasi Wasit</b></h3>
+                                    <div class="mb-3">
+                                        <label for="tempat" class="form-label">Tempat</label>
                                         <input type="text"
-                                            class="form-control @error('atasan') is-invalid @enderror" id="atasan"
-                                            value="{{ $atasan->first()->name }}" disabled>
-                                        @error('atasan')
+                                            class="form-control @error('tempat') is-invalid @enderror" name="tempat"
+                                            id="tempat" value="{{ auth()->user()->wasit->first()->tempat }}"
+                                            required>
+                                        @error('tempat')
                                             <div class="invalid-feedback">
                                                 {{ $message }}
                                             </div>
                                         @enderror
-                                    @else
-                                        <input type="text"
-                                            class="form-control @error('atasan') is-invalid @enderror" id="atasan"
-                                            value="belum ada atasan" disabled>
-                                    @endif
-
-                                </div>
-                                <input type="hidden" class="form-control @error('isKetua') is-invalid @enderror"
-                                    id="isKetua" name="isKetua" value="{{ auth()->user()->staff->isKetua }}">
-                                <input type="hidden" class="form-control @error('id_jabatan') is-invalid @enderror"
-                                    id="id_jabatan" name="id_jabatan" value="{{ auth()->user()->staff->id_jabatan }}">
-                                <input type="hidden" class="form-control @error('id_user') is-invalid @enderror"
-                                    id="id_user" name="id_user" value="{{ auth()->user()->staff->id_user }}">
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="tahun" class="form-label">Tahun</label>
+                                        <input type="year"
+                                            class="form-control @error('tahun') is-invalid @enderror" name="tahun"
+                                            id="tahun" value="{{ auth()->user()->wasit->first()->tahun }}"
+                                            required>
+                                        @error('tahun')
+                                            <div class="invalid-feedback">
+                                                {{ $message }}
+                                            </div>
+                                        @enderror
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="jenis_kegiatan" class="form-label">Jenis Kegiatan</label>
+                                        <input type="year"
+                                            class="form-control @error('jenis_kegiatan') is-invalid @enderror"
+                                            name="jenis_kegiatan" id="jenis_kegiatan"
+                                            value="{{ auth()->user()->wasit->first()->jenis_kegiatan }}" required>
+                                        @error('jenis_kegiatan')
+                                            <div class="invalid-feedback">
+                                                {{ $message }}
+                                            </div>
+                                        @enderror
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="keterangan" class="form-label">Keterangan</label>
+                                        <input type="year"
+                                            class="form-control @error('keterangan') is-invalid @enderror"
+                                            name="keterangan" id="keterangan"
+                                            value="{{ auth()->user()->wasit->first()->keterangan }}" required>
+                                        @error('keterangan')
+                                            <div class="invalid-feedback">
+                                                {{ $message }}
+                                            </div>
+                                        @enderror
+                                    </div>
+                                    <input type="hidden" class="form-control @error('id_user') is-invalid @enderror"
+                                        id="id_user" name="id_user"
+                                        value="{{ auth()->user()->wasit->first()->id_user }}">
+                                @endif
                                 <div class="row text-end">
                                     <div class="col">
                                         <a href="/dashboard" class="btn btn-secondary">Kembali</a>

@@ -38,6 +38,12 @@
                         <div class="dropdown-divider"></div>
                     </li>
                     <li>
+                        <a href="/profile" class="dropdown-item">
+                            <i class="fa-regular fa-user me-2"></i>
+                            Profile
+                        </a>
+                    </li>
+                    <li>
                         <form action="/logout" method="post">
                             @csrf
                             <button type="submit" class="dropdown-item">

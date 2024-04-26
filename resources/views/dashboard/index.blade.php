@@ -75,98 +75,100 @@
         <div class="body flex-grow-1 px-3">
             <div class="container-lg">
                 <div class="row">
-                    <div class="col col-sm-12 col-lg-4 mb-3">
-                        <div class="card h-100">
-                            <div class="card-body d-flex flex-column">
-                                <div class="row p-2 mb-3 d-flex justify-content-center align-items-center">
-                                    <div class="col-2 me-2">
-                                        <i class="fa-solid fa-person-running-fast fa-2xl me-2"></i>
+                    @if (!auth()->user()->status == 'WASIT')
+                        <div class="col col-sm-12 col-lg-4 mb-3">
+                            <div class="card h-100">
+                                <div class="card-body d-flex flex-column">
+                                    <div class="row p-2 mb-3 d-flex justify-content-center align-items-center">
+                                        <div class="col-2 me-2">
+                                            <i class="fa-solid fa-person-running-fast fa-2xl me-2"></i>
+                                        </div>
+                                        <div class="col">
+                                            <h5 class="card-title m-0">Lari</h5>
+                                            <p class="card-text m-0">
+                                                Form Wasit Lari
+                                            </p>
+                                        </div>
                                     </div>
-                                    <div class="col">
-                                        <h5 class="card-title m-0">Lari</h5>
-                                        <p class="card-text m-0">
-                                            Form Wasit Lari
-                                        </p>
+                                    <div class="mt-auto">
+                                        <button data-bs-toggle="modal" data-bs-target="#exampleModal"
+                                            class="btn btn-primary  w-100">
+                                            <i class="fa-solid fa-right-to-bracket"></i>
+                                        </button>
                                     </div>
-                                </div>
-                                <div class="mt-auto">
-                                    <button data-bs-toggle="modal" data-bs-target="#exampleModal"
-                                        class="btn btn-primary  w-100">
-                                        <i class="fa-solid fa-right-to-bracket"></i>
-                                    </button>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="col col-sm-12 col-lg-4 mb-3">
-                        <div class="card h-100">
-                            <div class="card-body d-flex flex-column">
-                                <div class="row p-2 mb-3 d-flex justify-content-center align-items-center">
-                                    <div class="col-2 me-2">
-                                        <i class="fa-solid fa-person-walking fa-2xl me-2"></i>
+                        <div class="col col-sm-12 col-lg-4 mb-3">
+                            <div class="card h-100">
+                                <div class="card-body d-flex flex-column">
+                                    <div class="row p-2 mb-3 d-flex justify-content-center align-items-center">
+                                        <div class="col-2 me-2">
+                                            <i class="fa-solid fa-person-walking fa-2xl me-2"></i>
+                                        </div>
+                                        <div class="col">
+                                            <h5 class="card-title m-0">Jalan</h5>
+                                            <p class="card-text m-0 ">
+                                                Form Wasit Jalan
+                                            </p>
+                                        </div>
                                     </div>
-                                    <div class="col">
-                                        <h5 class="card-title m-0">Jalan</h5>
-                                        <p class="card-text m-0 ">
-                                            Form Wasit Jalan
-                                        </p>
+                                    <div class="mt-auto">
+                                        <button data-bs-toggle="modal" data-bs-target="#exampleModal4"
+                                            class="btn btn-primary  w-100">
+                                            <i class="fa-solid fa-right-to-bracket"></i>
+                                        </button>
                                     </div>
-                                </div>
-                                <div class="mt-auto">
-                                    <button data-bs-toggle="modal" data-bs-target="#exampleModal4"
-                                        class="btn btn-primary  w-100">
-                                        <i class="fa-solid fa-right-to-bracket"></i>
-                                    </button>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="col col-sm-12 col-lg-4 mb-3">
-                        <div class="card h-100">
-                            <div class="card-body d-flex flex-column">
-                                <div class="row p-2 mb-3 d-flex justify-content-center align-items-center">
-                                    <div class="col-2  me-2">
-                                        <i class="fa-solid fa-user-injured fa-2xl me-2"></i>
+                        <div class="col col-sm-12 col-lg-4 mb-3">
+                            <div class="card h-100">
+                                <div class="card-body d-flex flex-column">
+                                    <div class="row p-2 mb-3 d-flex justify-content-center align-items-center">
+                                        <div class="col-2  me-2">
+                                            <i class="fa-solid fa-user-injured fa-2xl me-2"></i>
+                                        </div>
+                                        <div class="col">
+                                            <h5 class="card-title m-0">Lempar</h5>
+                                            <p class="card-text m-0">
+                                                Form Wasit Lempar
+                                            </p>
+                                        </div>
                                     </div>
-                                    <div class="col">
-                                        <h5 class="card-title m-0">Lempar</h5>
-                                        <p class="card-text m-0">
-                                            Form Wasit Lempar
-                                        </p>
+                                    <div class="mt-auto">
+                                        <button data-bs-toggle="modal" data-bs-target="#exampleModal2"
+                                            class="btn btn-primary  w-100">
+                                            <i class="fa-solid fa-right-to-bracket"></i>
+                                        </button>
                                     </div>
-                                </div>
-                                <div class="mt-auto">
-                                    <button data-bs-toggle="modal" data-bs-target="#exampleModal2"
-                                        class="btn btn-primary  w-100">
-                                        <i class="fa-solid fa-right-to-bracket"></i>
-                                    </button>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="col col-sm-12 col-lg-4 mb-3">
-                        <div class="card h-100">
-                            <div class="card-body d-flex flex-column">
-                                <div class="row p-2 mb-3 d-flex justify-content-center align-items-center">
-                                    <div class="col-2 me-2">
-                                        <i class="fa-solid fa-person-falling fa-2xl"></i>
+                        <div class="col col-sm-12 col-lg-4 mb-3">
+                            <div class="card h-100">
+                                <div class="card-body d-flex flex-column">
+                                    <div class="row p-2 mb-3 d-flex justify-content-center align-items-center">
+                                        <div class="col-2 me-2">
+                                            <i class="fa-solid fa-person-falling fa-2xl"></i>
+                                        </div>
+                                        <div class="col">
+                                            <h5 class="card-title m-0">Lompat</h5>
+                                            <p class="card-text m-0">
+                                                Form Wasit Lompat
+                                            </p>
+                                        </div>
                                     </div>
-                                    <div class="col">
-                                        <h5 class="card-title m-0">Lompat</h5>
-                                        <p class="card-text m-0">
-                                            Form Wasit Lompat
-                                        </p>
+                                    <div class="mt-auto">
+                                        <button data-bs-toggle="modal" data-bs-target="#exampleModal2"
+                                            class="btn btn-primary  w-100">
+                                            <i class="fa-solid fa-right-to-bracket"></i>
+                                        </button>
                                     </div>
-                                </div>
-                                <div class="mt-auto">
-                                    <button data-bs-toggle="modal" data-bs-target="#exampleModal2"
-                                        class="btn btn-primary  w-100">
-                                        <i class="fa-solid fa-right-to-bracket"></i>
-                                    </button>
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    @endif
 
 
                     <form action="{{ route('utama.store') }}" method="post">
@@ -183,13 +185,13 @@
                                     <div class="modal-body">
                                         <div class="mb-3">
                                             <label for="nama_wasit" class="form-label">Nama Wasit</label>
-                                            <input type="name" class="form-control" id="nama_wasit" name="nama_wasit"
-                                                aria-describedby="emailHelp">
+                                            <input type="name" class="form-control" id="nama_wasit"
+                                                name="nama_wasit" aria-describedby="emailHelp">
                                         </div>
                                         <div class="mb-3">
                                             <label for="pb" class="form-label">PB/Pemprov</label>
-                                            <input type="name" class="form-control" id="PB/Pemprov" name="pb"
-                                                aria-describedby="emailHelp">
+                                            <input type="name" class="form-control" id="PB/Pemprov"
+                                                name="pb" aria-describedby="emailHelp">
                                         </div>
                                         <label for="pb" class="form-label">Alamat</label>
                                         <div class="form-floating">

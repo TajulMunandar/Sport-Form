@@ -11,8 +11,11 @@ use App\Http\Controllers\LariController;
 use App\Http\Controllers\LemparController;
 use App\Http\Controllers\LompatController;
 use App\Http\Controllers\PenguasaanController;
+use App\Http\Controllers\PenilaianController;
 use App\Http\Controllers\PeraturanController;
 use App\Http\Controllers\PortalController;
+use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\TanggungController;
 use Illuminate\Support\Facades\Route;
 
@@ -42,6 +45,16 @@ Route::controller(AuthController::class)->group(function () {
     Route::post('/logout', 'logout');
 });
 
+Route::controller(RegisterController::class)->group(function () {
+    Route::get('/register', 'index')->name('register')->middleware('guest');
+    Route::post('/register', 'store')->middleware('guest');
+});
+
+Route::controller(ProfileController::class)->group(function () {
+    Route::get('/profile', 'index')->middleware('auth');
+    Route::put('/profile/{id}', 'update')->name('profile.update')->middleware('auth');
+});
+
 Route::prefix('/form')->middleware('auth')->group(function () {
     Route::resource('/utama', FormController::class);
     Route::resource('/tanggung', TanggungController::class);
@@ -53,7 +66,6 @@ Route::prefix('/form')->middleware('auth')->group(function () {
     Route::resource('/lompat', LompatController::class);
     Route::resource('/jalan', JalanController::class);
     Route::resource('/lempar', LemparController::class);
-
 });
 
 Route::prefix('/peraturan')->middleware('auth')->group(function () {
@@ -68,4 +80,5 @@ Route::prefix('/peraturan')->middleware('auth')->group(function () {
 });
 
 Route::resource('/buku', BukuController::class);
+Route::resource('/penilaian', PenilaianController::class);
 Route::get('/peraturan', [PeraturanController::class, 'index'])->name('peraturan.index')->middleware('auth');

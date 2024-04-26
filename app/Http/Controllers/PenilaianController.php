@@ -5,16 +5,34 @@ namespace App\Http\Controllers;
 use App\Models\Form;
 use Illuminate\Http\Request;
 
-class FinalController extends Controller
+class PenilaianController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $id= request('id');
-        $form = Form::where('id', $id)->first();
-        return view('form.page.final')->with(compact('form'));
+        $title = "Penilaian";
+        $nilais = Form::withCount('Jawaban')
+            ->get();
+
+        foreach ($nilais as $nilai) {
+            $totalSkor = $nilai->Jawaban->sum('skor');
+            $jumlahSoal = $nilai->Jawaban->map(function($jawaban) {
+                return $jawaban->Soal->count();
+            })->count();
+
+            if ($jumlahSoal != 0) {
+                $persentase = ($totalSkor / $jumlahSoal) * 100;
+            } else {
+                $persentase = 0; // Atau nilai default lainnya jika tidak ada jawaban
+            }
+
+            // Masukkan persentase ke dalam objek nilai
+            $nilai->persentase = $persentase;
+        }
+
+        return view('dashboard.penilaian.index', compact('title', 'nilais'));
     }
 
     /**
@@ -52,17 +70,9 @@ class FinalController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request)
+    public function update(Request $request, string $id)
     {
-        $rules = [
-            'simpulan_penilaian' => 'required'
-          ];
-
-          $validatedData = $request->validate($rules);
-
-          Form::where('id', $request->id_form)->update($validatedData);
-
-          return redirect('/dashboard')->with('success', 'Form baru berhasil tambahkan!');
+        //
     }
 
     /**

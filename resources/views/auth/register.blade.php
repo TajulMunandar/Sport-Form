@@ -20,12 +20,12 @@
 
     <!-- Theme CSS -->
     <link rel="stylesheet" href="{{ asset('css/theme.css') }}">
-    <title>Sign In | Sport</title>
+    <title>Register | Sport</title>
 </head>
 
 <body class="bg-light">
     <!-- container -->
-    <div class="container d-flex flex-column">
+    <div class="container d-flex flex-column p-3">
         <div class="row align-items-center justify-content-center g-0 min-vh-100">
             <div class="col-12 col-md-8 col-lg-6 col-xxl-4 py-8 py-xl-0">
 
@@ -37,9 +37,9 @@
                                 <button type="button" class="btn-close" data-bs-dismiss="alert"
                                     aria-label="Close"></button>
                             </div>
-                        @elseif (session()->has('failed'))
+                        @elseif (session()->has('error'))
                             <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                                {{ session('failed') }}
+                                {{ session('error') }}
                                 <button type="button" class="btn-close" data-bs-dismiss="alert"
                                     aria-label="Close"></button>
                             </div>
@@ -59,9 +59,78 @@
                             <p class="mb-5">Please enter your user information.</p>
                         </div>
                         <!-- Form -->
-                        <form action="/login" method="post">
+                        <form action="/register" method="post" enctype="multipart/form-data">
                             @csrf
                             <!-- Username -->
+                            <div class="mb-3">
+                                <label for="name" class="form-label">Nama</label>
+                                <input type="name" class="form-control @error('name') is-invalid @enderror"
+                                    name="name" id="name" placeholder="Enter your nama"
+                                    value="{{ old('nama') }}" required autofocus>
+                                @error('name')
+                                    <div class="invalid-feedback">
+                                        {{ $message }}
+                                    </div>
+                                @enderror
+                            </div>
+                            <div class="mb-3">
+                                <label for="jenis_kelamin" class="form-label">Jenis Kelamin</label>
+                                <select class="form-select" id="jenis_kelamin" name="jenis_kelamin">
+                                    <option value="laki-laki" selected>Laki - Laki</option>
+                                    <option value="perempuan">Perempuan</option>
+                                </select>
+                            </div>
+                            <div class="mb-3">
+                                <label for="ttl" class="form-label">Tempat Tanggal Lahir</label>
+                                <input type="text" class="form-control @error('ttl') is-invalid @enderror"
+                                    name="ttl" id="ttl" placeholder="Tempat / tanggal-bulan-tahun"
+                                    value="{{ old('ttl') }}" required autofocus>
+                                @error('ttl')
+                                    <div class="invalid-feedback">
+                                        {{ $message }}
+                                    </div>
+                                @enderror
+                            </div>
+                            <div class="mb-3">
+                                <label for="alamat" class="form-label">Alamat</label>
+                                <input type="text" class="form-control @error('alamat') is-invalid @enderror"
+                                    name="alamat" id="alamat" placeholder="Enter your alamat"
+                                    value="{{ old('alamat') }}" required autofocus>
+                                @error('alamat')
+                                    <div class="invalid-feedback">
+                                        {{ $message }}
+                                    </div>
+                                @enderror
+                            </div>
+                            <div class="mb-3">
+                                <label for="no_hp" class="form-label">No HP</label>
+                                <input type="text" class="form-control @error('no_hp') is-invalid @enderror"
+                                    name="no_hp" id="no_hp" placeholder="Enter your No Hp"
+                                    value="{{ old('no_hp') }}" required autofocus>
+                                @error('no_hp')
+                                    <div class="invalid-feedback">
+                                        {{ $message }}
+                                    </div>
+                                @enderror
+                            </div>
+                            <div class="mb-3">
+                                <label for="status" class="form-label">Status</label>
+                                <select class="form-select" id="status" name="status">
+                                    <option value="WASIT" selected>Wasit</option>
+                                    <option value="PENILAI">Penilai</option>
+                                </select>
+                            </div>
+                            <div class="mb-3">
+                                <label for="sertif" class="form-label">Upload Sertifikat <i>(pdf)</i></label>
+                                <input type="file" class="form-control @error('sertif') is-invalid @enderror"
+                                    name="sertif" id="sertif" placeholder="Enter your sertif"
+                                    value="{{ old('sertif') }}" required autofocus>
+                                @error('sertif')
+                                    <div class="invalid-feedback">
+                                        {{ $message }}
+                                    </div>
+                                @enderror
+                            </div>
                             <div class="mb-3">
                                 <label for="email" class="form-label">Email</label>
                                 <input type="email" class="form-control @error('email') is-invalid @enderror"
@@ -85,13 +154,14 @@
                                     <input type="checkbox" class="form-check-input" id="showpsd">
                                     <label class="form-check-label" for="showpsd">Show Password</label>
                                 </div>
-                                <a href="/register" class="mb-3">Belum Punya Akun?</a>
+                                <a href="/login" class="mb-3">Sudah Punya Akun?</a>
                             </div>
                             <div>
                                 <!-- Button -->
                                 <div class="d-grid">
-                                    <button type="submit" class="btn btn-primary">Sign in</button>
+                                    <button type="submit" class="btn btn-primary">Register</button>
                                 </div>
+                            </div>
                         </form>
                     </div>
                 </div>

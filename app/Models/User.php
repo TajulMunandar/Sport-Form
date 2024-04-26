@@ -21,6 +21,11 @@ class User extends Authenticatable
         'id'
     ];
 
+    public function wasit()
+    {
+        return $this->hasMany(Wasit::class, 'id_user');
+    }
+
     /**
      * The attributes that should be hidden for serialization.
      *

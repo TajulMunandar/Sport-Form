@@ -16,41 +16,49 @@
             </a>
         </li>
 
+        @if (!auth()->user()->status == 'WASIT')
+            <li class="menu-item {{ Request::is('form/*') ? 'active open' : '' }}">
+                <a href="javascript:void(0);" class="menu-link menu-toggle">
+                    <i class="fa-duotone fa-scroll fa-sm me-3"></i>
+                    <div data-i18n="Layouts">Instrumen</div>
+                </a>
 
-        <li class="menu-item {{ Request::is('form/*') ? 'active open' : '' }}">
-            <a href="javascript:void(0);" class="menu-link menu-toggle">
-                <i class="fa-duotone fa-scroll fa-sm me-3"></i>
-                <div data-i18n="Layouts">Instrumen</div>
-            </a>
-
-            <ul class="menu-sub">
-                <li class="menu-item {{ Request::is('form/lari*') ? 'active' : '' }}">
-                    <a href="/form/lari" class="menu-link">
-                        <div data-i18n="Analytics">Lari</div>
-                    </a>
-                </li>
-                <li class="menu-item {{ Request::is('form/lempar*') ? 'active' : '' }}">
-                    <a href="/form/lempar" class="menu-link">
-                        <div data-i18n="data surat">Lempar</div>
-                    </a>
-                </li>
-                <li class="menu-item {{ Request::is('form/lompat*') ? 'active' : '' }}">
-                    <a href="/form/lompat" class="menu-link">
-                        <div data-i18n="data surat">Lompat</div>
-                    </a>
-                </li>
-                <li class="menu-item {{ Request::is('form/jalan*') ? 'active' : '' }}">
-                    <a href="/form/jalan" class="menu-link">
-                        <div data-i18n="data surat">Jalan</div>
-                    </a>
-                </li>
-            </ul>
-        </li>
+                <ul class="menu-sub">
+                    <li class="menu-item {{ Request::is('form/lari*') ? 'active' : '' }}">
+                        <a href="/form/lari" class="menu-link">
+                            <div data-i18n="Analytics">Lari</div>
+                        </a>
+                    </li>
+                    <li class="menu-item {{ Request::is('form/lempar*') ? 'active' : '' }}">
+                        <a href="/form/lempar" class="menu-link">
+                            <div data-i18n="data surat">Lempar</div>
+                        </a>
+                    </li>
+                    <li class="menu-item {{ Request::is('form/lompat*') ? 'active' : '' }}">
+                        <a href="/form/lompat" class="menu-link">
+                            <div data-i18n="data surat">Lompat</div>
+                        </a>
+                    </li>
+                    <li class="menu-item {{ Request::is('form/jalan*') ? 'active' : '' }}">
+                        <a href="/form/jalan" class="menu-link">
+                            <div data-i18n="data surat">Jalan</div>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+        @endif
 
         <li class="menu-item {{ Request::is('buku*') ? 'active' : '' }}">
             <a href="/buku" class="menu-link">
                 <i class="fa-duotone fa-book fa-sm me-3"></i>
                 <div data-i18n="Analytics">Buku</div>
+            </a>
+        </li>
+
+        <li class="menu-item {{ Request::is('penilaian*') ? 'active' : '' }}">
+            <a href="/penilaian" class="menu-link">
+                <i class="fa-duotone fa-book fa-sm me-3"></i>
+                <div data-i18n="Analytics">Penilaian</div>
             </a>
         </li>
 
