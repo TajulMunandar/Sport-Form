@@ -16,7 +16,8 @@
             </a>
         </li>
 
-        @if (!auth()->user()->status == 'WASIT')
+        @if (auth()->user()->status === 'WASIT')
+        @else
             <li class="menu-item {{ Request::is('form/*') ? 'active open' : '' }}">
                 <a href="javascript:void(0);" class="menu-link menu-toggle">
                     <i class="fa-duotone fa-scroll fa-sm me-3"></i>
@@ -58,7 +59,7 @@
         <li class="menu-item {{ Request::is('wasit*') ? 'active' : '' }}">
             <a href="/wasit" class="menu-link">
                 <i class="fa-duotone fa-users fa-sm me-3"></i>
-                <div data-i18n="Analytics">Wasit</div>
+                <div data-i18n="Analytics">Riwayat Tugas</div>
             </a>
         </li>
 

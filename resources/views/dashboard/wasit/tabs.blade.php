@@ -22,16 +22,14 @@
     <div class="row mt-3">
         <div class="col">
             <div class="card mt-2">
-                @if (auth()->user()->status == 'PENILAI')
-                    <ul class="nav nav-pills p-3">
-                        <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="/wasit">Wasit</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" aria-current="page" href="/pelatih">Penilai</a>
-                        </li>
-                    </ul>
-                @endif
+                <ul class="nav nav-pills p-3">
+                    <li class="nav-item">
+                        <a class="nav-link" aria-current="page" href="/wasit">Wasit</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="/pelatih">Penilai</a>
+                    </li>
+                </ul>
                 <div class="card-body">
 
                     {{-- Tabel Data User --}}
@@ -49,14 +47,14 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($wasits as $wasit)
+                            @foreach ($pelatihs as $pelatih)
                                 <tr>
                                     <td>{{ $loop->iteration }}</td>
-                                    <td>{{ $wasit->user->name }}</td>
-                                    <td>{{ $wasit->tempat }}</td>
-                                    <td>{{ $wasit->tahun }}</td>
-                                    <td>{{ $wasit->jenis_kegiatan }}</td>
-                                    <td>{{ $wasit->keterangan }}</td>
+                                    <td>{{ $pelatih->user->name }}</td>
+                                    <td>{{ $pelatih->tempat }}</td>
+                                    <td>{{ $pelatih->tahun }}</td>
+                                    <td>{{ $pelatih->jenis_kegiatan }}</td>
+                                    <td>{{ $pelatih->keterangan }}</td>
                                     <td>
                                         <button type="button" class="btn btn-sm btn-warning" data-bs-toggle="modal"
                                             data-bs-target="#editUser{{ $loop->iteration }}">
@@ -76,26 +74,26 @@
                                     <div class="modal-dialog">
                                         <div class="modal-content">
                                             <div class="modal-header">
-                                                <h1 class="modal-title fs-5" id="exampleModalLabel">Modal Tambah Wasit
+                                                <h1 class="modal-title fs-5" id="exampleModalLabel">Modal Tambah Penilai
                                                 </h1>
                                                 <button type="button" class="btn-close" data-bs-dismiss="modal"
                                                     aria-label="Close"></button>
                                             </div>
-                                            <form action="{{ route('wasit.update', $wasit->id) }}" method="post">
+                                            <form action="{{ route('pelatih.update', $pelatih->id) }}" method="post">
                                                 @method('put')
                                                 @csrf
                                                 <div class="modal-body">
                                                     <div class="mb-3">
-                                                        <label for="id_user" class="form-label">Nama Wasit</label>
+                                                        <label for="id_user" class="form-label">Nama Penilai</label>
                                                         <select class="form-select" id="id_user" name="id_user">
-                                                            @if (auth()->user()->status == 'WASIT')
+                                                            @if (auth()->user()->status == 'PENILAI')
                                                                 <option value="{{ auth()->user()->id }}">
                                                                     {{ auth()->user()->name }}
                                                                 </option>
                                                             @else
                                                                 @foreach ($useres as $user)
                                                                     <option value="{{ $user->id }}"
-                                                                        @if ($user->id == $wasit->user->id) selected @endif>
+                                                                        @if ($user->id == $pelatih->user->id) selected @endif>
                                                                         {{ $user->name }}
                                                                     </option>
                                                                 @endforeach
@@ -108,14 +106,14 @@
                                                         <label for="tempat" class="form-label">Tempat</label>
                                                         <input type="name" class="form-control" id="tempat"
                                                             name="tempat" aria-describedby="emailHelp"
-                                                            value="{{ old('tempat', $wasit->tempat) }}">
+                                                            value="{{ old('tempat', $pelatih->tempat) }}">
                                                     </div>
 
                                                     <div class="mb-3">
                                                         <label for="tahun" class="form-label">Tahun</label>
                                                         <input type="year" class="form-control" id="tahun"
                                                             name="tahun" aria-describedby="emailHelp"
-                                                            value="{{ old('tahun', $wasit->tahun) }}">
+                                                            value="{{ old('tahun', $pelatih->tahun) }}">
                                                     </div>
 
                                                     <div class="mb-3">
@@ -123,14 +121,14 @@
                                                             Kegiatan</label>
                                                         <input type="year" class="form-control" id="jenis_kegiatan"
                                                             name="jenis_kegiatan" aria-describedby="emailHelp"
-                                                            value="{{ old('jenis_kegiatan', $wasit->jenis_kegiatan) }}">
+                                                            value="{{ old('jenis_kegiatan', $pelatih->jenis_kegiatan) }}">
                                                     </div>
 
                                                     <div class="mb-3">
                                                         <label for="keterangan" class="form-label">Keterangan</label>
                                                         <input type="text" class="form-control" id="keterangan"
                                                             name="keterangan" aria-describedby="emailHelp"
-                                                            value="{{ old('keterangan', $wasit->keterangan) }}">
+                                                            value="{{ old('keterangan', $pelatih->keterangan) }}">
                                                     </div>
                                                 </div>
                                                 <div class="modal-footer">
@@ -145,23 +143,22 @@
                                 {{-- / Modal Edit User --}}
 
                                 {{-- Modal Hapus User --}}
-
                                 <div class="modal fade" id="hapusUser{{ $loop->iteration }}" tabindex="-1"
                                     aria-labelledby="exampleModalLabel" aria-hidden="true">
                                     <div class="modal-dialog">
                                         <div class="modal-content">
                                             <div class="modal-header">
-                                                <h1 class="modal-title fs-5" id="exampleModalLabel">Modal Hapus Wasit
+                                                <h1 class="modal-title fs-5" id="exampleModalLabel">Modal Hapus Penilai
                                                 </h1>
                                                 <button type="button" class="btn-close" data-bs-dismiss="modal"
                                                     aria-label="Close"></button>
                                             </div>
-                                            <form action="{{ route('wasit.destroy', $wasit->id) }}" method="post">
+                                            <form action="{{ route('pelatih.destroy', $pelatih->id) }}" method="post">
                                                 @method('DELETE')
                                                 @csrf
                                                 <div class="modal-body">
-                                                    <p class="fs-5">Apakah anda yakin akan menghapus data wasit
-                                                        <b>{{ $wasit->user->name }}</b>?
+                                                    <p class="fs-5">Apakah anda yakin akan menghapus data Penilai
+                                                        <b>{{ $pelatih->user->name }}</b>?
                                                     </p>
                                                 </div>
                                                 <div class="modal-footer">
@@ -190,16 +187,16 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="exampleModalLabel">Modal Tambah Wasit</h1>
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">Modal Tambah Penilai</h1>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <form action="{{ route('wasit.store') }}" method="post">
+                <form action="{{ route('pelatih.store') }}" method="post">
                     @csrf
                     <div class="modal-body">
                         <div class="mb-3">
-                            <label for="id_user" class="form-label">Nama Wasit</label>
+                            <label for="id_user" class="form-label">Nama Penilai</label>
                             <select class="form-select" id="id_user" name="id_user">
-                                @if (auth()->user()->status == 'WASIT')
+                                @if (auth()->user()->status == 'PENILAI')
                                     <option value="{{ auth()->user()->id }}">
                                         {{ auth()->user()->name }}
                                     </option>

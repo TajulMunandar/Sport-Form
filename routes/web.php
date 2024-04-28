@@ -10,6 +10,7 @@ use App\Http\Controllers\KerapianController;
 use App\Http\Controllers\LariController;
 use App\Http\Controllers\LemparController;
 use App\Http\Controllers\LompatController;
+use App\Http\Controllers\PelatihController;
 use App\Http\Controllers\PenguasaanController;
 use App\Http\Controllers\PenilaianController;
 use App\Http\Controllers\PeraturanController;
@@ -82,5 +83,6 @@ Route::prefix('/peraturan')->middleware('auth')->group(function () {
 
 Route::resource('/buku', BukuController::class)->middleware('auth');
 Route::resource('/wasit', WasitController::class)->middleware('auth');
+Route::resource('/pelatih', PelatihController::class)->middleware('auth');
 Route::resource('/penilaian', PenilaianController::class)->middleware('auth');
 Route::get('/peraturan', [PeraturanController::class, 'index'])->name('peraturan.index')->middleware('auth');

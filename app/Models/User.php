@@ -23,7 +23,12 @@ class User extends Authenticatable
 
     public function wasit()
     {
-        return $this->hasMany(Wasit::class, 'id_user');
+        return $this->hasOne(Wasit::class, 'id_user');
+    }
+
+    public function pelatih()
+    {
+        return $this->hasOne(Pelatih::class, 'id_user');
     }
 
     /**
