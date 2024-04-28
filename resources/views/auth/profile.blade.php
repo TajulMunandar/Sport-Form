@@ -116,60 +116,6 @@
                                         </div>
                                     @enderror
                                 </div>
-                                @if (auth()->user()->status == 'WASIT')
-                                    <h3> <b>Informasi Wasit</b></h3>
-                                    <div class="mb-3">
-                                        <label for="tempat" class="form-label">Tempat</label>
-                                        <input type="text"
-                                            class="form-control @error('tempat') is-invalid @enderror" name="tempat"
-                                            id="tempat" value="{{ auth()->user()->wasit->first()->tempat }}"
-                                            required>
-                                        @error('tempat')
-                                            <div class="invalid-feedback">
-                                                {{ $message }}
-                                            </div>
-                                        @enderror
-                                    </div>
-                                    <div class="mb-3">
-                                        <label for="tahun" class="form-label">Tahun</label>
-                                        <input type="year"
-                                            class="form-control @error('tahun') is-invalid @enderror" name="tahun"
-                                            id="tahun" value="{{ auth()->user()->wasit->first()->tahun }}"
-                                            required>
-                                        @error('tahun')
-                                            <div class="invalid-feedback">
-                                                {{ $message }}
-                                            </div>
-                                        @enderror
-                                    </div>
-                                    <div class="mb-3">
-                                        <label for="jenis_kegiatan" class="form-label">Jenis Kegiatan</label>
-                                        <input type="year"
-                                            class="form-control @error('jenis_kegiatan') is-invalid @enderror"
-                                            name="jenis_kegiatan" id="jenis_kegiatan"
-                                            value="{{ auth()->user()->wasit->first()->jenis_kegiatan }}" required>
-                                        @error('jenis_kegiatan')
-                                            <div class="invalid-feedback">
-                                                {{ $message }}
-                                            </div>
-                                        @enderror
-                                    </div>
-                                    <div class="mb-3">
-                                        <label for="keterangan" class="form-label">Keterangan</label>
-                                        <input type="year"
-                                            class="form-control @error('keterangan') is-invalid @enderror"
-                                            name="keterangan" id="keterangan"
-                                            value="{{ auth()->user()->wasit->first()->keterangan }}" required>
-                                        @error('keterangan')
-                                            <div class="invalid-feedback">
-                                                {{ $message }}
-                                            </div>
-                                        @enderror
-                                    </div>
-                                    <input type="hidden" class="form-control @error('id_user') is-invalid @enderror"
-                                        id="id_user" name="id_user"
-                                        value="{{ auth()->user()->wasit->first()->id_user }}">
-                                @endif
                                 <div class="row text-end">
                                     <div class="col">
                                         <a href="/dashboard" class="btn btn-secondary">Kembali</a>

@@ -17,6 +17,7 @@ use App\Http\Controllers\PortalController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\TanggungController;
+use App\Http\Controllers\WasitController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -79,6 +80,7 @@ Route::prefix('/peraturan')->middleware('auth')->group(function () {
     });
 });
 
-Route::resource('/buku', BukuController::class);
-Route::resource('/penilaian', PenilaianController::class);
+Route::resource('/buku', BukuController::class)->middleware('auth');
+Route::resource('/wasit', WasitController::class)->middleware('auth');
+Route::resource('/penilaian', PenilaianController::class)->middleware('auth');
 Route::get('/peraturan', [PeraturanController::class, 'index'])->name('peraturan.index')->middleware('auth');

@@ -55,6 +55,13 @@
             </a>
         </li>
 
+        <li class="menu-item {{ Request::is('wasit*') ? 'active' : '' }}">
+            <a href="/wasit" class="menu-link">
+                <i class="fa-duotone fa-users fa-sm me-3"></i>
+                <div data-i18n="Analytics">Wasit</div>
+            </a>
+        </li>
+
         <li class="menu-item {{ Request::is('penilaian*') ? 'active' : '' }}">
             <a href="/penilaian" class="menu-link">
                 <i class="fa-duotone fa-book fa-sm me-3"></i>

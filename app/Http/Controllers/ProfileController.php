@@ -26,15 +26,6 @@ class ProfileController extends Controller
             'no_hp' => 'required|string|max:255',
         ];
 
-        if (auth()->user()->status == 'WASIT') {
-            $rules += [
-                'tempat' => 'required|string|max:255',
-                'tahun' => 'required|integer|min:1900|max:' . date('Y'),
-                'jenis_kegiatan' => 'required|string|max:255',
-                'keterangan' => 'required|string|max:255',
-            ];
-        }
-
         $validatedData = $request->validate($rules);
 
         // Update data user
@@ -54,27 +45,6 @@ class ProfileController extends Controller
             }
             // Simpan sertifikat baru
             $validatedData['sertif'] = $request->file('sertif')->store('public/file-sertif');
-        }
-
-        // Jika status pengguna adalah WASIT, update atau tambahkan data wasit
-        if ($user->status === 'WASIT') {
-            // Jika pengguna sudah memiliki data wasit, update data tersebut
-            if ($user->wasit->first()) {
-                $user->wasit->first()->update([
-                    'tempat' => $validatedData['tempat'],
-                    'tahun' => $validatedData['tahun'],
-                    'jenis_kegiatan' => $validatedData['jenis_kegiatan'],
-                    'keterangan' => $validatedData['keterangan'],
-                ]);
-            } else {
-                // Jika tidak, buat data wasit baru
-                $user->wasit->first()->create([
-                    'tempat' => $validatedData['tempat'],
-                    'tahun' => $validatedData['tahun'],
-                    'jenis_kegiatan' => $validatedData['jenis_kegiatan'],
-                    'keterangan' => $validatedData['keterangan'],
-                ]);
-            }
         }
 
         return redirect()->back()->with('success', 'Profil berhasil diperbarui!');
