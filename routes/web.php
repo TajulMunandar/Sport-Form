@@ -18,6 +18,7 @@ use App\Http\Controllers\PortalController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\TanggungController;
+use App\Http\Controllers\UserController;
 use App\Http\Controllers\WasitController;
 use Illuminate\Support\Facades\Route;
 
@@ -81,6 +82,8 @@ Route::prefix('/peraturan')->middleware('auth')->group(function () {
     });
 });
 
+Route::resource('/user', UserController::class)->middleware('auth');
+Route::put('/user/reset-password/{user}', [UserController::class, 'resetPasswordAdmin'])->name('user.password')->middleware('auth');
 Route::resource('/buku', BukuController::class)->middleware('auth');
 Route::resource('/wasit', WasitController::class)->middleware('auth');
 Route::resource('/pelatih', PelatihController::class)->middleware('auth');

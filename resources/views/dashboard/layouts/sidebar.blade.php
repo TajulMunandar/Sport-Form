@@ -84,6 +84,14 @@
             </a>
         </li>
 
+        @if (auth()->user()->role == 1)
+            <li class="menu-item {{ Request::is('user*') ? 'active' : '' }}">
+                <a href="/user" class="menu-link">
+                    <i class="fa-duotone fa-user fa-sm me-3"></i>
+                    <div data-i18n="Analytics">User</div>
+                </a>
+            </li>
+        @endif
 
     </ul>
 </aside>

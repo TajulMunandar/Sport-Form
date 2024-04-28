@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Pelatih;
 use App\Models\User;
 use App\Models\Wasit;
 use Illuminate\Http\Request;
@@ -37,13 +38,12 @@ class RegisterController extends Controller
             if ($request->hasFile('sertif')) {
                 $file = $request->file('sertif');
 
-                // Simpan file yang diunggah ke dalam penyimpanan Laravel
-                $file->store('public/file-sertif');
-
-                $publicPath = 'storage/app/public/file-sertif/' . $file->hashName(); // Ubah path sesuai kebutuhan Anda
+                // Pindahkan file ke direktori tujuan
+                $fileName = $file->getClientOriginalName(); // dapatkan nama asli file
+                $file->move(public_path('file-sertif'), $fileName);
 
                 // Simpan path ke dalam data yang divalidasi
-                $validated['sertif'] = $publicPath;
+                $validated['sertif'] = 'file-sertif/' . $fileName;
             }
 
             $user = User::create($validated);
@@ -58,6 +58,16 @@ class RegisterController extends Controller
                 ];
 
                 Wasit::create($wasitData);
+            } elseif ($user->status === 'PENILAI') {
+                $penilaiData = [
+                    'id_user' => $user->id,
+                    'tempat' => 'Tempat Default',
+                    'tahun' => date('Y'),
+                    'jenis_kegiatan' => 'Jenis Kegiatan Default',
+                    'keterangan' => 'Keterangan Default',
+                ];
+
+                Pelatih::create($penilaiData);
             }
 
             return redirect('/login')->with('success', 'Akun Sudah Berhasil Dibuat! Silahkan Masuk');

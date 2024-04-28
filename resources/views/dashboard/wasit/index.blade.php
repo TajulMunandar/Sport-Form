@@ -22,7 +22,7 @@
     <div class="row mt-3">
         <div class="col">
             <div class="card mt-2">
-                @if (auth()->user()->status == 'PENILAI')
+                @if (auth()->user()->status == 'PENILAI' || auth()->user()->role == 1)
                     <ul class="nav nav-pills p-3">
                         <li class="nav-item">
                             <a class="nav-link active" aria-current="page" href="/wasit">Wasit</a>
