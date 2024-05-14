@@ -11,16 +11,16 @@
                                 <tr>
                                     <th>NO</th>
                                     <th>NAMA WASIT</th>
-                                    <th>PB</th>
-                                    <th>ALAMAT</th>
-                                    <th>EMAIL</th>
+                                    <th>PB/PEMPROF/KAB</th>
+                                    <th>TEMPAT</th>
+                                    <th>NAMA ACARA LOMBA</th>
                                     <th>JENIS</th>
                                     <th>SIMPULAN PENILAIAN</th>
                                     <th>SKOR AKHIR</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach($nilais as $key => $nilai)
+                                @foreach ($nilais as $key => $nilai)
                                     <tr>
                                         <td>{{ $key + 1 }}</td>
                                         <td>{{ $nilai->nama_wasit }}</td>
@@ -29,7 +29,8 @@
                                         <td>{{ $nilai->email }}</td>
                                         <td>{{ $nilai->jenis }}</td>
                                         <td>{{ $nilai->simpulan_penilaian }}</td>
-                                        <td>{{ number_format($nilai->persentase, 2) }}%</td> <!-- Menampilkan persentase skor akhir -->
+                                        <td>{{ number_format($nilai->persentase, 2) }}%</td>
+                                        <!-- Menampilkan persentase skor akhir -->
                                     </tr>
                                 @endforeach
                             </tbody>
