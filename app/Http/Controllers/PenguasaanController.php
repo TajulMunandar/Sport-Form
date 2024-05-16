@@ -14,9 +14,17 @@ class PenguasaanController extends Controller
      */
     public function index()
     {
-        $id= request('id');
+        $id = request('id');
         $form = Form::where('id', $id)->first();
-        $soals = Soal::where('id_aspek', 2)->get();
+        if ($form->jenis == 1) {
+            $soals = Soal::where('id_aspek', 2)->get();
+        } elseif ($form->jenis == 2) {
+            $soals = Soal::where('id_aspek', 14)->get();
+        } elseif ($form->jenis == 3) {
+            $soals = Soal::where('id_aspek', 10)->get();
+        } elseif ($form->jenis == 4) {
+            $soals = Soal::where('id_aspek', 6)->get();
+        }
         return view('form.page.quiz2')->with(compact('soals', 'form'));
     }
 
@@ -42,7 +50,7 @@ class PenguasaanController extends Controller
                 'skor' => $skor[$index],
             ];
 
-           Jawaban::create($validatedData1);
+            Jawaban::create($validatedData1);
         }
         return redirect()->route('kecakapan.index', ['id' => $request->id_form])->with('success', 'Penguasaan Peraturan berhasil ditambahkan!');
     }

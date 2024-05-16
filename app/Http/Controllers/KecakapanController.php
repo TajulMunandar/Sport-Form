@@ -14,9 +14,18 @@ class KecakapanController extends Controller
      */
     public function index()
     {
-        $id= request('id');
+        $id = request('id');
         $form = Form::where('id', $id)->first();
-        $soals = Soal::where('id_aspek', 3)->get();
+        if ($form->jenis == 1) {
+            $soals = Soal::where('id_aspek', 3)->get();
+        } elseif ($form->jenis == 2) {
+            $soals = Soal::where('id_aspek', 15)->get();
+        } elseif ($form->jenis == 3) {
+            $soals = Soal::where('id_aspek', 11)->get();
+        } elseif ($form->jenis == 4) {
+            $soals = Soal::where('id_aspek', 7)->get();
+        }
+
         return view('form.page.quiz3')->with(compact('soals', 'form'));
     }
 

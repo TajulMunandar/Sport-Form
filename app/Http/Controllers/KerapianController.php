@@ -14,9 +14,17 @@ class KerapianController extends Controller
      */
     public function index()
     {
-        $id= request('id');
+        $id = request('id');
         $form = Form::where('id', $id)->first();
-        $soals = Soal::where('id_aspek', 4)->get();
+        if ($form->jenis == 1) {
+            $soals = Soal::where('id_aspek', 4)->get();
+        } elseif ($form->jenis == 2) {
+            $soals = Soal::where('id_aspek', 16)->get();
+        } elseif ($form->jenis == 3) {
+            $soals = Soal::where('id_aspek', 12)->get();
+        } elseif ($form->jenis == 4) {
+            $soals = Soal::where('id_aspek', 8)->get();
+        }
         return view('form.page.quiz4')->with(compact('soals', 'form'));
     }
 
@@ -42,7 +50,7 @@ class KerapianController extends Controller
                 'skor' => $skor[$index],
             ];
 
-           Jawaban::create($validatedData1);
+            Jawaban::create($validatedData1);
         }
         return redirect()->route('final.index', ['id' => $request->id_form])->with('success', 'Tanggung Jawab Profesi berhasil ditambahkan!');
     }

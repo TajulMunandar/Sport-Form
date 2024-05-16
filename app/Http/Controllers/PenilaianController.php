@@ -18,7 +18,7 @@ class PenilaianController extends Controller
 
         foreach ($nilais as $nilai) {
             $totalSkor = $nilai->Jawaban->sum('skor');
-            $jumlahSoal = $nilai->Jawaban->map(function($jawaban) {
+            $jumlahSoal = $nilai->Jawaban->map(function ($jawaban) {
                 return $jawaban->Soal->count();
             })->count();
 
