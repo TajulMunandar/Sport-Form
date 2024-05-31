@@ -51,20 +51,20 @@ class RegisterController extends Controller
             if ($user->status === 'WASIT') {
                 $wasitData = [
                     'id_user' => $user->id,
-                    'tempat' => 'Tempat Default',
-                    'tahun' => date('Y'),
-                    'jenis_kegiatan' => 'Jenis Kegiatan Default',
-                    'keterangan' => 'Keterangan Default',
+                    'tempat' => $request->tempat,
+                    'tahun' => $request->tahun,
+                    'jenis_kegiatan' => $request->jenis_kegiatan,
+                    'keterangan' => $request->keterangan,
                 ];
 
                 Wasit::create($wasitData);
             } elseif ($user->status === 'PENILAI') {
                 $penilaiData = [
                     'id_user' => $user->id,
-                    'tempat' => 'Tempat Default',
-                    'tahun' => date('Y'),
-                    'jenis_kegiatan' => 'Jenis Kegiatan Default',
-                    'keterangan' => 'Keterangan Default',
+                    'tempat' => $request->tempat,
+                    'tahun' => $request->tahun,
+                    'jenis_kegiatan' => $request->jenis_kegiatan,
+                    'keterangan' => $request->keterangan,
                 ];
 
                 Pelatih::create($penilaiData);

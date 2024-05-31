@@ -149,6 +149,31 @@
                                     id="password" required>
                             </div>
                             <!-- Checkbox -->
+
+                            <div class="mb-3">
+                                <label for="tempat" class="form-label">Tempat</label>
+                                <input type="name" class="form-control" id="tempat" name="tempat"
+                                    aria-describedby="emailHelp">
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="tahun" class="form-label">Tahun</label>
+                                <input type="year" class="form-control" id="tahun" name="tahun"
+                                    aria-describedby="emailHelp">
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="jenis_kegiatan" class="form-label">Jenis Kegiatan</label>
+                                <input type="year" class="form-control" id="jenis_kegiatan" name="jenis_kegiatan"
+                                    aria-describedby="emailHelp">
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="keterangan" class="form-label">Keterangan</label>
+                                <input type="text" class="form-control" id="keterangan" name="keterangan"
+                                    aria-describedby="emailHelp">
+                            </div>
+
                             <div class="d-lg-flex justify-content-between align-items-center mb-4">
                                 <div class="form-check custom-checkbox">
                                     <input type="checkbox" class="form-check-input" id="showpsd">
