@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Form;
+use App\Models\Instrumen;
 use Illuminate\Http\Request;
 
 class PenilaianController extends Controller
@@ -13,26 +14,13 @@ class PenilaianController extends Controller
     public function index()
     {
         $title = "Penilaian";
-        $nilais = Form::withCount('Jawaban')
-            ->get();
-
-        foreach ($nilais as $nilai) {
-            $totalSkor = $nilai->Jawaban->sum('skor');
-            $jumlahSoal = $nilai->Jawaban->map(function($jawaban) {
-                return $jawaban->Soal->count();
-            })->count();
-
-            if ($jumlahSoal != 0) {
-                $persentase = ($totalSkor / $jumlahSoal) * 100;
-            } else {
-                $persentase = 0; // Atau nilai default lainnya jika tidak ada jawaban
-            }
-
-            // Masukkan persentase ke dalam objek nilai
-            $nilai->persentase = $persentase;
+        if (auth()->user()->status == "WASIT") {
+            $instrumens = Instrumen::where('id_wasit', auth()->user()->Wasit->id)->get();
+        } else {
+            $instrumens = Instrumen::all();
         }
 
-        return view('dashboard.penilaian.index', compact('title', 'nilais'));
+        return view('dashboard.penilaian.index', compact('title', 'instrumens'));
     }
 
     /**
@@ -54,9 +42,36 @@ class PenilaianController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(Instrumen $penilaian)
     {
-        //
+        $title = "Penilaian Detail";
+
+        $nilais = Form::withCount('Jawaban')->where('id_instrumen', $penilaian->id)
+            ->get();
+        $totalPersentase = 0;
+        foreach ($nilais as $nilai) {
+            $totalSkor = $nilai->Jawaban->sum('skor');
+            $jumlahSoal = $nilai->Jawaban->map(function ($jawaban) {
+                return $jawaban->Soal->count();
+            })->count();
+
+            if ($jumlahSoal != 0) {
+                $persentase = ($totalSkor / $jumlahSoal) * 100;
+                $persentase = $persentase / 4;
+            } else {
+                $persentase = 0; // Atau nilai default lainnya jika tidak ada jawaban
+            }
+
+            // Masukkan persentase ke dalam objek nilai
+            $nilai->persentase = $persentase;
+
+            $totalPersentase += $persentase;
+        }
+
+        $averagePersentase = $totalPersentase / 4;
+
+
+        return view('dashboard.penilaian.show', compact('title', 'nilais', 'penilaian', 'averagePersentase'));
     }
 
     /**

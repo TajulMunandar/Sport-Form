@@ -12,7 +12,7 @@ class FinalController extends Controller
      */
     public function index()
     {
-        $id= request('id');
+        $id = request('id');
         $form = Form::where('id', $id)->first();
         return view('form.page.final')->with(compact('form'));
     }
@@ -55,14 +55,14 @@ class FinalController extends Controller
     public function update(Request $request)
     {
         $rules = [
-            'simpulan_penilaian' => 'required'
-          ];
+            'catatan_penilai' => 'required'
+        ];
 
-          $validatedData = $request->validate($rules);
+        $validatedData = $request->validate($rules);
 
-          Form::where('id', $request->id_form)->update($validatedData);
+        Form::where('id', $request->id_form)->update($validatedData);
 
-          return redirect('/portal')->with('success', 'Form baru berhasil tambahkan!');
+        return redirect('/instrumen')->with('success', 'Form baru berhasil tambahkan!');
     }
 
     /**

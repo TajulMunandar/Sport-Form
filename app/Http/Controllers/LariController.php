@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Instrumen;
 use Illuminate\Http\Request;
 use App\Models\User;
 
@@ -10,11 +11,11 @@ class LariController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
+        $instrumen = Instrumen::where('id', request('id'))->get();
         $title = "Instrumen Lari";
-        $wasits = User::where('status', "WASIT")->get();
-        return view('dashboard.lari.index')->with(compact("title", "wasits"));
+        return view('dashboard.lari.index')->with(compact("title", "instrumen"));
     }
 
     /**

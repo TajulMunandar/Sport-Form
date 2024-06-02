@@ -31,10 +31,10 @@
             @method('put')
             @csrf
             <input type="hidden" name="id_form" value="{{ request('id') }}">
-            <label for="simpulan Penilaian" class="form-label">Simpulan Penilaian</label>
+            <label for="catatan Penilaian" class="form-label">Catatan Penilaian</label>
             <div class="form-floating">
-                <textarea class="form-control" placeholder="simpulan_penilaian" id="floatingTextarea" name="simpulan_penilaian"></textarea>
-                <label for="floatingTextarea">Simpulan Penilaian</label>
+                <textarea class="form-control" placeholder="catatan_penilaian" id="floatingTextarea" name="catatan_penilai"></textarea>
+                <label for="floatingTextarea">Catatan Penilaian</label>
             </div>
 
             <hr>

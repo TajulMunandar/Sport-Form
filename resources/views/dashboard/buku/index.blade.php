@@ -1,7 +1,7 @@
 @extends('dashboard.layouts.main')
 
 @section('content')
-  <div class="row mt-3">
+    <div class="row mt-3">
         <div class="col-12">
             <div class="card mt-2">
                 <div class="card-body">
@@ -19,7 +19,8 @@
                                     <td>1</td>
                                     <td>Instrumen</td>
                                     <td>
-                                        <a class="btn btn-info" href="/buku/buku" target="_blank"><i class="fa-solid fa-eye"></i></a>
+                                        <a class="btn btn-info" href="/buku/buku" target="_blank"><i
+                                                class="fa-solid fa-eye"></i></a>
                                     </td>
                                 </tr>
                             </tbody>

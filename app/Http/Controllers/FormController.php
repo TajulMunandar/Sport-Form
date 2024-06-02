@@ -30,17 +30,14 @@ class FormController extends Controller
     {
         try {
             $validatedData = $request->validate([
-                'nama_wasit' => 'required|max:255',
-                'pb' => 'required|max:255',
-                'alamat' => 'required|max:255',
-                'email' => 'required|max:255',
-                'jenis' => 'required|max:255',
+                'id_instrumen' => 'required',
+                'jenis' => 'required',
             ]);
         } catch (\Illuminate\Validation\ValidationException $exception) {
             return redirect()->route('portal.index')->with('failed', $exception->getMessage());
         }
 
-       $form = Form::create($validatedData);
+        $form = Form::create($validatedData);
 
         return redirect()->route('tanggung.index', ['id' => $form->id])->with('success', 'Form baru berhasil ditambahkan!');
     }

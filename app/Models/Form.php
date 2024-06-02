@@ -18,4 +18,8 @@ class Form extends Model
         return $this->hasMany(Jawaban::class, 'id_form', 'id');
     }
 
+    public function Instrumen()
+    {
+        return $this->belongsTo(Instrumen::class, 'id_instrumen');
+    }
 }

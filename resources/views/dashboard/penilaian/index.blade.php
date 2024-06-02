@@ -11,26 +11,26 @@
                                 <tr>
                                     <th>NO</th>
                                     <th>NAMA WASIT</th>
-                                    <th>PB/PEMPROF/KAB</th>
-                                    <th>TEMPAT</th>
-                                    <th>NAMA ACARA LOMBA</th>
-                                    <th>JENIS</th>
-                                    <th>SIMPULAN PENILAIAN</th>
-                                    <th>SKOR AKHIR</th>
+                                    <th>NAMA LOMBA</th>
+                                    <th>PB/PEMPROV/KAB</th>
+                                    <th>ALAMAT</th>
+                                    <th>Action</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($nilais as $key => $nilai)
+                                @foreach ($instrumens as $instrumen)
                                     <tr>
-                                        <td>{{ $key + 1 }}</td>
-                                        <td>{{ $nilai->nama_wasit }}</td>
-                                        <td>{{ $nilai->pb }}</td>
-                                        <td>{{ $nilai->alamat }}</td>
-                                        <td>{{ $nilai->email }}</td>
-                                        <td>{{ $nilai->jenis }}</td>
-                                        <td>{{ $nilai->simpulan_penilaian }}</td>
-                                        <td>{{ number_format($nilai->persentase, 2) }}%</td>
-                                        <!-- Menampilkan persentase skor akhir -->
+                                        <td>{{ $loop->iteration }}</td>
+                                        <td>{{ $instrumen->Wasit->user->name }}</td>
+                                        <td>{{ $instrumen->AcaraLomba->nama_acara }}</td>
+                                        <td>{{ $instrumen->pb }}</td>
+                                        <td>{{ $instrumen->alamat }}</td>
+                                        <td>
+                                            <a class="btn btn-sm btn-info"
+                                                href="{{ route('penilaian.show', $instrumen->id) }}">
+                                                <i class="fa-regular fa-eye"></i>
+                                            </a>
+                                        </td>
                                     </tr>
                                 @endforeach
                             </tbody>

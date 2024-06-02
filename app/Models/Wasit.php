@@ -17,4 +17,9 @@ class Wasit extends Model
     {
         return $this->belongsTo(User::class, 'id_user');
     }
+
+    public function Instrumen()
+    {
+        return $this->hasMany(Instrumen::class, 'id_wasit', 'id');
+    }
 }

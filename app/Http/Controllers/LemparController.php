@@ -2,15 +2,16 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Instrumen;
 use Illuminate\Http\Request;
 use App\Models\User;
 
 class LemparController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
+        $instrumen = Instrumen::where('id', request('id'))->get();
         $title = "Instrumen Lempar";
-        $wasits = User::where('status', "WASIT")->get();
-        return view('dashboard.lempar.index')->with(compact("title", "wasits"));
+        return view('dashboard.lempar.index')->with(compact("title", "instrumen"));
     }
 }

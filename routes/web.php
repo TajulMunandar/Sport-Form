@@ -5,6 +5,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BukuController;
 use App\Http\Controllers\FinalController;
 use App\Http\Controllers\FormController;
+use App\Http\Controllers\InstrumenController;
 use App\Http\Controllers\JalanController;
 use App\Http\Controllers\KecakapanController;
 use App\Http\Controllers\KerapianController;
@@ -62,15 +63,22 @@ Route::controller(ProfileController::class)->group(function () {
 Route::prefix('/form')->middleware('auth')->group(function () {
     Route::resource('/utama', FormController::class);
     Route::resource('/tanggung', TanggungController::class);
-
     Route::resource('/penguasaan', PenguasaanController::class);
     Route::resource('/kecakapan', KecakapanController::class);
     Route::resource('/kerapian', KerapianController::class);
     Route::resource('/final', FinalController::class);
-    Route::resource('/lari', LariController::class);
-    Route::resource('/lompat', LompatController::class);
-    Route::resource('/jalan', JalanController::class);
-    Route::resource('/lempar', LemparController::class);
+    Route::resource('/lari', LariController::class)->parameters([
+        'instrumen' => 'id',
+    ]);
+    Route::resource('/lompat', LompatController::class)->parameters([
+        'instrumen' => 'id',
+    ]);
+    Route::resource('/jalan', JalanController::class)->parameters([
+        'instrumen' => 'id',
+    ]);
+    Route::resource('/lempar', LemparController::class)->parameters([
+        'instrumen' => 'id',
+    ]);
 });
 
 Route::prefix('/buku')->middleware('auth')->group(function () {
@@ -94,6 +102,7 @@ Route::prefix('/peraturan')->middleware('auth')->group(function () {
 Route::resource('/user', UserController::class)->middleware('auth');
 Route::put('/user/reset-password/{user}', [UserController::class, 'resetPasswordAdmin'])->name('user.password')->middleware('auth');
 Route::resource('/buku', BukuController::class)->middleware('auth');
+Route::resource('/instrumen', InstrumenController::class)->middleware('auth');
 Route::resource('/wasit', WasitController::class)->middleware('auth');
 Route::resource('/lomba', AcaraLombaController::class)->middleware('auth');
 Route::resource('/pelatih', PelatihController::class)->middleware('auth');

@@ -12,4 +12,9 @@ class AcaraLomba extends Model
     protected $guarded = [
         'id'
     ];
+
+    public function Instrumen()
+    {
+        return $this->hasMany(Instrumen::class, 'id_lomba', 'id');
+    }
 }

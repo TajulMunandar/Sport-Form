@@ -2,15 +2,16 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Instrumen;
 use Illuminate\Http\Request;
 use App\Models\User;
 
 class LompatController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
+        $instrumen = Instrumen::where('id', request('id'))->get();
         $title = "Instrumen Lompat";
-        $wasits = User::where('status', "WASIT")->get();
-        return view('dashboard.lompat.index')->with(compact("title","wasits"));
+        return view('dashboard.lompat.index')->with(compact("title", "instrumen"));
     }
 }
