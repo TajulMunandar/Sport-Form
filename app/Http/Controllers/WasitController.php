@@ -22,7 +22,7 @@ class WasitController extends Controller
             $wasits = Wasit::with('user')->get();
         }
 
-        $title = "Wasit";
+        $title = "Data Riwayat Tugas Wasit";
         return view('dashboard.wasit.index')->with(compact('wasits', 'title', 'useres'));
     }
 

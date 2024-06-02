@@ -149,7 +149,9 @@
                                     id="password" required>
                             </div>
                             <!-- Checkbox -->
-
+                            
+                            <!--wasit dan penilai-->
+                            <p class="fw-bold">Riwayat Tugas Wasit/Penilai</p>
                             <div class="mb-3">
                                 <label for="tempat" class="form-label">Tempat</label>
                                 <input type="name" class="form-control" id="tempat" name="tempat"

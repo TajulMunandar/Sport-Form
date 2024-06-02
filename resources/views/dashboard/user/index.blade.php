@@ -34,9 +34,9 @@
                                 <th>EMAIL</th>
                                 <th>JENIS KELAMIN</th>
                                 <th>TEMPAT TANGGAL LAHIR</th>
+                                <th>ALAMAT</th>
                                 <th>NO HP</th>
                                 <th>STATUS</th>
-                                <th>ALAMAT</th>
                                 <th>SERTIF</th>
                                 <th>ROLE</th>
                                 <th>ACTION</th>

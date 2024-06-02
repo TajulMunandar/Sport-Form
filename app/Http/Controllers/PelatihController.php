@@ -22,7 +22,7 @@ class PelatihController extends Controller
             $pelatihs = Pelatih::with('user')->get();
         }
 
-        $title = "PENILAI";
+        $title = "Data Riwayat Tugas Penilai";
         return view('dashboard.wasit.tabs')->with(compact('pelatihs', 'title', 'useres'));
     }
 

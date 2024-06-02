@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\User;
 
 class LariController extends Controller
 {
@@ -12,7 +13,8 @@ class LariController extends Controller
     public function index()
     {
         $title = "Instrumen Lari";
-        return view('dashboard.lari.index')->with(compact("title"));
+        $wasits = User::where('status', "WASIT")->get();
+        return view('dashboard.lari.index')->with(compact("title", "wasits"));
     }
 
     /**

@@ -20,7 +20,7 @@
                 </div>
                 <div class="mb-3">
                     <label for="email" class="form-label">Nama Acara Lomba</label>
-                    <input type="email" class="form-control" id="email" name="email" aria-describedby="emailHelp">
+                    <input type="name" class="form-control" id="email" name="email" aria-describedby="emailHelp">
                 </div>
                 <input type="hidden" value="1" name="jenis">
                 <button class="btn btn-primary float-end mt-4">Simpan</button>

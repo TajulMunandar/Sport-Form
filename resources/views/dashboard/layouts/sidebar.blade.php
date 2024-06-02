@@ -49,6 +49,13 @@
             </li>
         @endif
 
+        <li class="menu-item {{ Request::is('lomba*') ? 'active' : '' }}">
+            <a href="/lomba" class="menu-link">
+                <i class="fa-duotone fa-calendar fa-sm me-3"></i>
+                <div data-i18n="Analytics">Acara Lomba</div>
+            </a>
+        </li>
+
         <li class="menu-item {{ Request::is('buku*') ? 'active' : '' }}">
             <a href="/buku" class="menu-link">
                 <i class="fa-duotone fa-book fa-sm me-3"></i>

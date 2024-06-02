@@ -49,13 +49,12 @@ class UserController extends Controller
 
         if ($request->hasFile('sertif')) {
             $file = $request->file('sertif');
-
             // Pindahkan file ke direktori tujuan
             $fileName = $file->getClientOriginalName(); // dapatkan nama asli file
             $file->move(public_path('file-sertif'), $fileName);
 
             // Simpan path ke dalam data yang divalidasi
-            $validatedData['sertif'] = 'file-sertif/' . $fileName;
+            $validatedData['sertif'] = 'Sport-Form/public/file-sertif/' . $fileName;
         }
 
 
@@ -105,8 +104,9 @@ class UserController extends Controller
 
         $validatedData = $request->validate($rules);
 
-        if ($user->sertif) {
-            $oldFilePath = public_path($user->sertif); // Path lengkap menuju file yang lama
+       if ($user->sertif) {
+            $fileName = basename($user->sertif); // Mendapatkan nama file dari path yang tersimpan di database
+            $oldFilePath = public_path('file-sertif/'.$fileName); // Path lengkap menuju file yang lama
             if (File::exists($oldFilePath)) {
                 File::delete($oldFilePath); // Hapus file lama dari sistem file
             }
@@ -116,7 +116,7 @@ class UserController extends Controller
             $file = $request->file('sertif');
             $fileName = $file->getClientOriginalName(); // dapatkan nama asli file
             $file->move(public_path('file-sertif'), $fileName);
-            $validatedData['sertif'] = 'file-sertif/' . $fileName; // Simpan path ke dalam data yang divalidasi
+            $validatedData['sertif'] = 'Sport-Form/public/file-sertif/' . $fileName; // Simpan path ke dalam data yang divalidasi
         }
 
         User::where('id', $user->id)->update($validatedData);
@@ -130,9 +130,10 @@ class UserController extends Controller
     public function destroy(User $user)
     {
         if ($user->sertif) {
-            $filePath = public_path($user->sertif); // Path lengkap menuju file
-            if (file_exists($filePath)) {
-                unlink($filePath); // Hapus file dari sistem file
+            $fileName = basename($user->sertif); // Mendapatkan nama file dari path yang tersimpan di database
+            $oldFilePath = public_path('file-sertif/'.$fileName); // Path lengkap menuju file yang lama
+            if (File::exists($oldFilePath)) {
+                File::delete($oldFilePath); // Hapus file lama dari sistem file
             }
         }
 

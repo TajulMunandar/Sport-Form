@@ -62,7 +62,7 @@ class FinalController extends Controller
 
           Form::where('id', $request->id_form)->update($validatedData);
 
-          return redirect('/dashboard')->with('success', 'Form baru berhasil tambahkan!');
+          return redirect('/portal')->with('success', 'Form baru berhasil tambahkan!');
     }
 
     /**
