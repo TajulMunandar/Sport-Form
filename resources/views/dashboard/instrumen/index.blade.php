@@ -202,43 +202,80 @@
 
                                                     <div class="row">
                                                         <div class="mb-2 col-lg-4">
-                                                            <a href="{{ route('lari.index', ['id' => $instrumen->id]) }}">
-                                                                <div class="shadow card">
+                                                            @if (!$instrumen->Form->contains('jenis', 1))
+                                                                <a
+                                                                    href="{{ route('lari.index', ['id' => $instrumen->id]) }}">
+                                                                    <div class="shadow card">
+                                                                        <div class="text-center card-body">
+                                                                            Lari
+                                                                        </div>
+                                                                    </div>
+                                                                </a>
+                                                            @else
+                                                                <div class="shadow card"
+                                                                    style="pointer-events: none; opacity: 0.5;">
                                                                     <div class="text-center card-body">
                                                                         Lari
                                                                     </div>
                                                                 </div>
-                                                            </a>
+                                                            @endif
                                                         </div>
                                                         <div class="mb-2 col-lg-4">
-                                                            <a
-                                                                href=" {{ route('lompat.index', ['id' => $instrumen->id]) }}">
-                                                                <div class="shadow card">
+                                                            @if (!$instrumen->Form->contains('jenis', 3))
+                                                                <a
+                                                                    href=" {{ route('lompat.index', ['id' => $instrumen->id]) }}">
+                                                                    <div class="shadow card">
+                                                                        <div class="text-center card-body">
+                                                                            Lompat
+                                                                        </div>
+                                                                    </div>
+                                                                </a>
+                                                            @else
+                                                                <div class="shadow card"
+                                                                    style="pointer-events: none; opacity: 0.5;">
                                                                     <div class="text-center card-body">
                                                                         Lompat
                                                                     </div>
                                                                 </div>
-                                                            </a>
+                                                            @endif
                                                         </div>
                                                         <div class="mb-2 col-lg-4">
-                                                            <a
-                                                                href="{{ route('jalan.index', ['id' => $instrumen->id]) }}">
-                                                                <div class="shadow card">
+                                                            @if (!$instrumen->Form->contains('jenis', 4))
+                                                                <a
+                                                                    href="{{ route('jalan.index', ['id' => $instrumen->id]) }}">
+                                                                    <div class="shadow card">
+                                                                        <div class="text-center card-body">
+                                                                            Jalan
+                                                                        </div>
+                                                                    </div>
+                                                                </a>
+                                                            @else
+                                                                <div class="shadow card"
+                                                                    style="pointer-events: none; opacity: 0.5;">
                                                                     <div class="text-center card-body">
                                                                         Jalan
                                                                     </div>
                                                                 </div>
-                                                            </a>
+                                                            @endif
                                                         </div>
                                                         <div class="mb-2 col-lg-4">
-                                                            <a
-                                                                href="{{ route('lempar.index', ['id' => $instrumen->id]) }}">
-                                                                <div class="shadow card">
+                                                            @if (!$instrumen->Form->contains('jenis', 2))
+                                                                <a
+                                                                    href="{{ route('lempar.index', ['id' => $instrumen->id]) }}">
+                                                                    <div class="shadow card">
+                                                                        <div class="text-center card-body">
+                                                                            Lempar
+                                                                        </div>
+                                                                    </div>
+                                                                </a>
+                                                            @else
+                                                                <div class="shadow card"
+                                                                    style="pointer-events: none; opacity: 0.5;">
                                                                     <div class="text-center card-body">
                                                                         Lempar
                                                                     </div>
                                                                 </div>
-                                                            </a>
+                                                            @endif
                                                         </div>
                                                     </div>
 
