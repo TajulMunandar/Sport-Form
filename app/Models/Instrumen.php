@@ -13,6 +13,11 @@ class Instrumen extends Model
         'id'
     ];
 
+    public function Penilai()
+    {
+        return $this->belongsTo(Pelatih::class, 'id_penilai');
+    }
+    
     public function Wasit()
     {
         return $this->belongsTo(Wasit::class, 'id_wasit');

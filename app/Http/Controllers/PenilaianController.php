@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Form;
 use App\Models\Instrumen;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class PenilaianController extends Controller
 {
@@ -15,9 +16,14 @@ class PenilaianController extends Controller
     {
         $title = "Penilaian";
         if (auth()->user()->status == "WASIT") {
-            $instrumens = Instrumen::where('id_wasit', auth()->user()->Wasit->id)->get();
+            $instrumens = Instrumen::where('id_wasit', auth()->user()->Wasit->id)
+                ->groupBy('id_wasit')
+                ->select('id_wasit', DB::raw('MAX(id) as id'), DB::raw('MAX(pb) as pb'), DB::raw('MAX(alamat) as alamat'), DB::raw('MAX(id_lomba) as id_lomba'))
+                ->get();
         } else {
-            $instrumens = Instrumen::all();
+            $instrumens = Instrumen::groupBy('id_wasit')
+                ->select('id_wasit', DB::raw('MAX(id) as id'), DB::raw('MAX(pb) as pb'), DB::raw('MAX(alamat) as alamat'), DB::raw('MAX(id_lomba) as id_lomba'))
+                ->get();
         }
 
         return view('dashboard.penilaian.index', compact('title', 'instrumens'));
@@ -46,33 +52,78 @@ class PenilaianController extends Controller
     {
         $title = "Penilaian Detail";
 
-        $nilais = Form::withCount('Jawaban')->where('id_instrumen', $penilaian->id)
+        // Ambil ID Wasit dari instrumen yang sedang ditampilkan
+        $instrumenId = $penilaian->id;
+        $instrumen = Instrumen::find($instrumenId);
+        $idWasit = $instrumen->id_wasit;
+
+        // Ambil semua instrumen terkait dengan id_wasit
+        $instrumens = Instrumen::where('id_wasit', $idWasit)
+            ->take(3) // Ambil maksimal 3 instrumen
             ->get();
+
+        $penilaiData = [];
         $totalPersentase = 0;
-        foreach ($nilais as $nilai) {
-            $totalSkor = $nilai->Jawaban->sum('skor');
-            $jumlahSoal = $nilai->Jawaban->map(function ($jawaban) {
-                return $jawaban->Soal->count();
-            })->count();
+        $jumlahPenilai = 0;
 
-            if ($jumlahSoal != 0) {
-                $persentase = ($totalSkor / $jumlahSoal) * 100;
-                $persentase = $persentase / 4;
-            } else {
-                $persentase = 0; // Atau nilai default lainnya jika tidak ada jawaban
+        // Proses setiap instrumen
+        foreach ($instrumens as $instrumen) {
+            $nilais = Form::where('id_instrumen', $instrumen->id)
+                ->with('Jawaban.Soal') // Pastikan relasi ter-load
+                ->get();
+
+            foreach ($nilais as $nilai) {
+                $totalSkor = $nilai->Jawaban->sum('skor');
+                $jumlahSoal = $nilai->Jawaban->count(); // Total soal yang dinilai
+
+                // Hitung persentase nilai
+                if ($jumlahSoal != 0) {
+                    $persentase = ($totalSkor / $jumlahSoal) * 100;
+                    $persentase = $persentase / 4; // Normalisasi
+                } else {
+                    $persentase = 0;
+                }
+
+                $penilai = $nilai->Instrumen->Penilai->user->name;
+
+                // Tambah data penilai
+                $penilaiData[$penilai][] = [
+                    'tanggal' => $nilai->created_at->format('Y-m-d'),
+                    'nama_lomba' => $instrumen->AcaraLomba->nama_acara,
+                    'nilai' => number_format($persentase, 2),
+                    'simpulan' => $this->getSimpulan($persentase),
+                    'catatan_penilai' => $nilai->catatan_penilai,
+                ];
+
+                $totalPersentase += $persentase;
+                $jumlahPenilai++;
             }
-
-            // Masukkan persentase ke dalam objek nilai
-            $nilai->persentase = $persentase;
-
-            $totalPersentase += $persentase;
         }
 
-        $averagePersentase = $totalPersentase / 4;
+        // Hitung rata-rata persentase berdasarkan jumlah penilai
+        $averagePersentase = $jumlahPenilai != 0 ? $totalPersentase / $jumlahPenilai : 0;
+        $wasit = $instrumen->Wasit;
 
-
-        return view('dashboard.penilaian.show', compact('title', 'nilais', 'penilaian', 'averagePersentase'));
+        return view('dashboard.penilaian.show', compact('title', 'penilaiData', 'instrumen', 'averagePersentase', 'wasit'));
     }
+
+
+    // Fungsi untuk menentukan simpulan penilaian
+    private function getSimpulan($persentase)
+    {
+        if ($persentase >= 95) {
+            return 'Sangat Baik';
+        } elseif ($persentase >= 85) {
+            return 'Baik';
+        } elseif ($persentase >= 75) {
+            return 'Cukup';
+        } elseif ($persentase >= 65) {
+            return 'Sedang';
+        } else {
+            return 'Kurang';
+        }
+    }
+
 
     /**
      * Show the form for editing the specified resource.

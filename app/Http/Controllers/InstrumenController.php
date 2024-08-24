@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\AcaraLomba;
 use App\Models\Instrumen;
+use App\Models\Pelatih;
 use App\Models\Wasit;
 use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
@@ -19,14 +20,20 @@ class InstrumenController extends Controller
         if (auth()->user()->status == "WASIT") {
             $instrumens = Instrumen::where('id_wasit', auth()->user()->Wasit->id)->get();
             $wasits = Wasit::where('id', auth()->user()->Wasit->id)->get();
+            $penilais = Pelatih::all();
+        } else if (auth()->user()->status == "PENILAI") {
+            $instrumens = Instrumen::where('id_wasit', auth()->user()->Wasit->id)->get();
+            $wasits = Wasit::all();
+            $penilais = Pelatih::where('id', auth()->user()->Pelatih->id)->get();
         } else {
             $instrumens = Instrumen::all();
             $wasits = Wasit::with('user')->latest()->get();
+            $penilais = Pelatih::all();
         }
 
         $lombas = AcaraLomba::all();
 
-        return view('dashboard.instrumen.index')->with(compact('title', 'instrumens', 'wasits', 'lombas'));
+        return view('dashboard.instrumen.index')->with(compact('title', 'instrumens', 'wasits', 'lombas', 'penilais'));
     }
 
     /**
@@ -44,6 +51,7 @@ class InstrumenController extends Controller
     {
         try {
             $validatedData = $request->validate([
+                'id_penilai' => 'required',
                 'id_wasit' => 'required',
                 'id_lomba' => 'required',
                 'pb' => 'required',
@@ -61,9 +69,7 @@ class InstrumenController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Instrumen $instruman)
-    {
-    }
+    public function show(Instrumen $instruman) {}
 
     /**
      * Show the form for editing the specified resource.
@@ -80,6 +86,7 @@ class InstrumenController extends Controller
     {
         try {
             $validatedData = $request->validate([
+                'id_penilai' => 'required',
                 'id_wasit' => 'required',
                 'id_lomba' => 'required',
                 'pb' => 'required',

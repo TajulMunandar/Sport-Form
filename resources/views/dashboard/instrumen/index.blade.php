@@ -28,6 +28,7 @@
                             <thead class="align-middle border-bottom">
                                 <tr>
                                     <th>NO</th>
+                                    <th>NAMA PENILAI</th>
                                     <th>NAMA WASIT</th>
                                     <th>NAMA LOMBA</th>
                                     <th>PB/PEMPROV/KAB</th>
@@ -39,6 +40,7 @@
                                 @foreach ($instrumens as $instrumen)
                                     <tr>
                                         <td>{{ $loop->iteration }}</td>
+                                        <td>{{ $instrumen->Penilai->user->name }}</td>
                                         <td>{{ $instrumen->Wasit->user->name }}</td>
                                         <td>{{ $instrumen->AcaraLomba->nama_acara }}</td>
                                         <td>{{ $instrumen->pb }}</td>
@@ -75,6 +77,21 @@
                                                     @method('put')
                                                     @csrf
                                                     <div class="modal-body">
+
+                                                        <div class="mb-3">
+                                                            <label for="penilai" class="form-label">Penilai</label>
+                                                            <select class="form-select" id="penilai" name="id_penilai">
+                                                                @foreach ($penilais as $penilai)
+                                                                    @if (old('id_penilai', $instrumen->id_penilai) == $penilai->id)
+                                                                        <option value="{{ $penilai->id }}" selected>
+                                                                            {{ $penilai->user->name }}</option>
+                                                                    @else
+                                                                        <option value="{{ $penilai->id }}">
+                                                                            {{ $penilai->user->name }}</option>
+                                                                    @endif
+                                                                @endforeach
+                                                            </select>
+                                                        </div>
 
                                                         <div class="mb-3">
                                                             <label for="wasit" class="form-label">Wasit</label>
@@ -310,6 +327,14 @@
                     @csrf
                     <div class="modal-body">
                         <div class="row">
+                            <div class="mb-3">
+                                <label for="penilai" class="form-label">Penilai</label>
+                                <select class="form-select" id="penilai" name="id_penilai">
+                                    @foreach ($penilais as $penilai)
+                                        <option value="{{ $penilai->id }}" selected>{{ $penilai->user->name }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
                             <div class="mb-3">
                                 <label for="wasit" class="form-label">Wasit</label>
                                 <select class="form-select" id="wasit" name="id_wasit">

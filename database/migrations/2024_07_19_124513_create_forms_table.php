@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('forms', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('id_instrumen')->constrained('instrumens')->onDelete('restrict')->onUpdate('cascade');
             $table->tinyInteger('jenis');
             $table->string('catatan_penilai')->nullable();
             $table->timestamps();

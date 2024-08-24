@@ -5,6 +5,10 @@
     <div class="card">
         <div class="card-body">
             <div class="mb-3">
+                <label for="nama_penilai" class="form-label">Nama Penilai</label>
+                <input type="name" class="form-control" value="{{ $instrumen->first()->Penilai->user->name }}" disabled>
+            </div>
+            <div class="mb-3">
                 <label for="nama_wasit" class="form-label">Nama Wasit</label>
                 <input type="name" class="form-control" value="{{ $instrumen->first()->Wasit->user->name }}" disabled>
             </div>
