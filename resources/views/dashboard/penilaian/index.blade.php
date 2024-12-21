@@ -4,6 +4,11 @@
     <div class="row mt-3">
         <div class="col-12">
             <div class="card mt-2">
+                <div class="col pt-3 ps-3 mb-0">
+                    <a class="btn btn-info float-start text-white">
+                        <i class="fa-duotone fa-download"></i> Download Pdf
+                    </a>
+                </div>
                 <div class="card-body">
                     <div class="table-responsive">
                         <table id="myTable" class="table w-100 table-borderless table-striped border-top border-bottom">

@@ -8,6 +8,7 @@ use App\Models\Pelatih;
 use App\Models\Wasit;
 use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class InstrumenController extends Controller
 {
@@ -22,12 +23,18 @@ class InstrumenController extends Controller
             $wasits = Wasit::where('id', auth()->user()->Wasit->id)->get();
             $penilais = Pelatih::all();
         } else if (auth()->user()->status == "PENILAI") {
-            $instrumens = Instrumen::where('id_wasit', auth()->user()->Wasit->id)->get();
-            $wasits = Wasit::all();
+            $instrumens = Instrumen::where('id_penilai', auth()->user()->pelatih->id)->get();
+            $wasits = Wasit::select('id_user', DB::raw('MIN(id) as id')) // Pilih id yang minimum
+                ->groupBy('id_user')
+                ->get();
             $penilais = Pelatih::where('id', auth()->user()->Pelatih->id)->get();
         } else {
             $instrumens = Instrumen::all();
-            $wasits = Wasit::with('user')->latest()->get();
+             $wasits = Wasit::with('user')
+                ->select('id_user', DB::raw('MIN(id) as id')) // Pilih id yang minimum
+                ->groupBy('id_user')
+                ->latest()
+                ->get();
             $penilais = Pelatih::all();
         }
 
@@ -106,7 +113,18 @@ class InstrumenController extends Controller
      */
     public function destroy(Instrumen $instruman)
     {
-        Instrumen::destroy($instruman->id);
+        
+    foreach ($instruman->Form as $form) {
+        // Hapus semua jawaban yang terkait dengan form ini
+        $form->Jawaban()->delete();
+    }
+
+    // Hapus semua form yang terkait dengan instrumen ini
+    $instruman->Form()->delete();
+
+    // Hapus instrumen
+    $instruman->delete();
+        // Instrumen::destroy($instruman->id);
         return redirect('/instrumen')->with('success', "Wasit " . $instruman->Wasit->user->name . " berhasil dihapus!");
     }
 }

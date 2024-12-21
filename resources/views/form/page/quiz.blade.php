@@ -85,7 +85,7 @@
                         @for ($i = 1; $i <= 4; $i++)
                             <div class="form-check mx-5">
                                 <input class="form-check-input" type="radio" name="skor[{{ $soal->id }}]"
-                                    id="jawaban{{ $soal->id }}_{{ $i }}" value="{{ $i }}">
+                                    id="jawaban{{ $soal->id }}_{{ $i }}" value="{{ $i }}" required>
                                 <label class="form-check-label" for="jawaban{{ $soal->id }}_{{ $i }}">
                                     {{ $i }}
                                 </label>

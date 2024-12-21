@@ -2,6 +2,6 @@
 
 @section('content')
 
-<iframe src="{{ asset('pdf/Instrumen Revisi.pdf') }}" style="width: 100%; height: 600px;"></iframe>
+<iframe src="{{ asset('pdf/INTRUMEN FINAL.pdf') }}" style="width: 100%; height: 600px;"></iframe>
 
 @endsection

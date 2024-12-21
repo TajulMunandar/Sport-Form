@@ -73,7 +73,7 @@ class RegisterController extends Controller
             return redirect('/login')->with('success', 'Akun Sudah Berhasil Dibuat! Silahkan Masuk');
         } catch (\Exception $e) {
 
-            return redirect()->back()->with('error', "Gagal membuat akun. Silahkan coba lagi. $e");
+            return redirect()->back()->with('error', "Gagal membuat akun. Silahkan coba lagi. Email Sudah Digunakan");
         }
     }
 }

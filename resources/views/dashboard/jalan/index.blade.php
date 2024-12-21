@@ -30,7 +30,7 @@
                 @csrf
                 <input type="hidden" value="{{ $instrumen->first()->id }}" name="id_instrumen">
                 <input type="hidden" value="4" name="jenis">
-                <button class="btn btn-primary float-end mt-4">Berikutnya</button>
+                <button class="btn btn-primary float-end mt-4">Buka Instrumen</button>
             </form>
         </div>
     </div>

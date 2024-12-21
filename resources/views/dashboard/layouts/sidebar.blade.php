@@ -16,7 +16,7 @@
             </a>
         </li>
 
-        @if (auth()->user()->status === 'PENILAI')
+        @if (auth()->user()->status === 'WASIT')
         @else
             <li class="menu-item {{ Request::is('instrumen*') ? 'active' : '' }}">
                 <a href="/instrumen" class="menu-link">
@@ -25,13 +25,15 @@
                 </a>
             </li>
         @endif
-
+        
+          @if (auth()->user()->role == 1)
         <li class="menu-item {{ Request::is('lomba*') ? 'active' : '' }}">
             <a href="/lomba" class="menu-link">
                 <i class="fa-duotone fa-calendar fa-sm me-3"></i>
                 <div data-i18n="Analytics">Acara Lomba</div>
             </a>
         </li>
+        @endif
 
         <li class="menu-item {{ Request::is('buku*') ? 'active' : '' }}">
             <a href="/buku" class="menu-link">
